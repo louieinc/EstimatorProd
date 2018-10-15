@@ -162,8 +162,8 @@ class FalconEstimator {
 
     public function content($content) {
         global $post, $wpdb, $options;
-        $page = get_option('_fpe_page');
-        if ($post->ID == $page) {
+        $fpe_page = get_option('_fpe_page');
+        if ($post->ID == $fpe_page) {
             $hash = $_GET['ua'];
             $access = get_posts([
                 'post_type' => 'estimator',
