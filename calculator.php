@@ -117,12 +117,12 @@
         </div>
     </div>
     <div class="question" id="tv-markets">
-        <h4>In witch market(s) will your spot air?</h4>
+        <h4>In which market(s) will your spot air?</h4>
         <input type="text" class="js-autocomplete" style="display:none" name="markets" placeholder="Add markets...">
         <div class="answer dont-show" data-show="tv" style="display:none;">Continue</div>
     </div>
     <div class="question" id="radio-markets">
-        <h4>In witch market(s) will your spot air?</h4>
+        <h4>In which market(s) will your spot air?</h4>
         <input type="text" class="js-autocomplete" style="display:none" name="markets" placeholder="Add markets...">
         <div class="answer dont-show" data-show="radio" style="display:none;">Continue</div>
     </div>
@@ -153,6 +153,7 @@
         <input type="number"  name="scripts" value="1">
     </div>
     <div class="totals">
+        <div class="container">
             <div class="detailed">
                 <div class="actions">
                     <a href="#"><i class="fas fa-envelope"></i> Email this estimate</a><br>

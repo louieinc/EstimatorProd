@@ -30,13 +30,15 @@
 
 #fpe .totals { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 99; padding: 15px; font-size: 15px; background: #f5f5f5; border: 1px solid #cfcfcf; }
 
+#fpe .totals .container { max-width: 600px; margin: 0 auto; }
+
 #fpe .totals a { color: #064473; font-size: 15px; font-family: 'Roboto', sans-serif; font-weight: bold; text-decoration: none; box-shadow: none; }
 
 #fpe .totals .general { line-height: 1.2; font-weight: bold; }
 
 #fpe .totals .general .expand { cursor: pointer; }
 
-#fpe .totals .detailed { display: none; padding: 0 0 1rem 0; font-size: 17px; margin-bottom: 1rem; border-bottom: 1px solid #555; }
+#fpe .totals .detailed { display: none; padding: 0 0 1rem 0; font-size: 17px; margin-bottom: 1rem; border-bottom: 1px solid #555; max-height: 70vh; overflow: auto; }
 
 #fpe .totals .detailed > div { border-top: 1px solid #cfcfcf; margin-top: 1rem; }
 

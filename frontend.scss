@@ -80,6 +80,10 @@
         font-size: 15px;
         background: #f5f5f5;
         border: 1px solid #cfcfcf;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
         a {
             color: #064473;
             font-size: 15px;
@@ -101,6 +105,8 @@
             font-size: 17px;
             margin-bottom: 1rem;
             border-bottom: 1px solid #555;
+            max-height: 70vh;
+            overflow: auto;
             &>div {
                 border-top: 1px solid #cfcfcf;
                 margin-top: 1rem;
