@@ -1,5 +1,9 @@
 #fpe { padding-bottom: 100px; max-width: 600px; margin: 0 auto 3rem; }
 
+#fpe .fpe-row { display: flex; flex-direction: row; }
+
+#fpe .fpe-row .half { width: 50%; }
+
 #fpe .text-right { text-align: right; }
 
 #fpe .minimal-form-input { padding: 0 !important; }
@@ -16,7 +20,7 @@
 
 #fpe .question { display: none; }
 
-#fpe .question h4 { font-family: 'Roboto', sans-serif; font-size: 16px; color: #000; margin-bottom: 20px; padding: 0; font-weight: bold; line-height: 1.2; }
+#fpe .question h4 { font-family: 'Roboto', sans-serif; font-size: 18px; color: #000; margin-bottom: 20px; padding: 0; font-weight: bold; line-height: 1.2; }
 
 #fpe .question .answers { margin-bottom: 32px; transition: 1s all; }
 
@@ -25,6 +29,8 @@
 #fpe .question .answer:hover, #fpe .question .answer:focus, #fpe .question input[type=text]:hover, #fpe .question input[type=text]:focus, #fpe .question input[type=number]:hover, #fpe .question input[type=number]:focus { background: #fcfcfc; }
 
 #fpe .question .answer.dont-show, #fpe .question input[type=text].dont-show, #fpe .question input[type=number].dont-show { display: none !important; }
+
+#fpe .question .answer.checked, #fpe .question input[type=text].checked, #fpe .question input[type=number].checked { background: #f5f5f5; }
 
 #fpe .question input[type=number] { max-width: 60px; text-align: center; padding: 0 5px 0 15px; }
 
@@ -138,3 +144,9 @@
 .tagify__dropdown__item[primary=true] { position: relative; }
 
 .tagify__dropdown__item[primary=true]:after { content: 'Primary'; background: #d94d49; color: #fff; position: absolute; padding: 3px 5px; border-radius: 3px; line-height: 1; font-size: 11px; font-weight: bold; right: 10px; top: 9px; }
+
+.ui-slider { height: 5px; background: #cfcfcf; position: relative; margin-bottom: 2rem; }
+
+.ui-slider .custom-handle { width: 2.5em; height: 1.4em; top: 50%; margin-top: -.7em; text-align: center; line-height: 1.4em; background: white; position: absolute; border: 1px solid #064473; color: #064473; border-radius: 5px; }
+
+.ui-slider .custom-handle.ui-state-hover { background: white !important; }

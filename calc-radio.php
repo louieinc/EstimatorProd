@@ -1,0 +1,140 @@
+<?php
+	$performers = [
+		'announcer' => 'Announcer',
+		'solo_duo' => 'Solo or Duo',
+		'group_3' => 'Group 3-5',
+		'group_6' => 'Group 6-8',
+		'group_9' => 'Group 9 or more',
+		'creative_session' => 'Creative Session Calls',
+		'singers_contractors' => 'Singers Contractors',
+	];
+?>
+
+<div class="question" id="radio_performers">
+	<h4>What types of performers will you be using?</h4>
+	<?php
+		foreach ($performers as $type => $label) {
+			if ($type == 'creative_session') {
+				FalconEstimator::slider($type, $label, 0, 0, 10, 0.5);
+			} else {
+				FalconEstimator::slider($type, $label);	
+			}
+		}
+	?>
+	<div class="answer special">Continue</div>
+</div>
+
+<div class="question" id="radio_creative_sessions">
+	<h4>How many hours for creative session?</h4>
+	<?php FalconEstimator::slider('creative_hours', '', 1, 1, 10, 0.5); ?>
+	<div class="answer">Continue</div>
+</div>
+
+<?php foreach ($performers as $type => $label): ?>
+<div class="question" id="radio_<?php echo $type ?>_weekend">
+	<h4>Weekend work for <span><?php echo $label ?></span>?</h4>
+	<div class="answer" data-set="<?php echo $type ?>_weekend" data-value="1">Yes</div>
+    <div class="answer" data-set="<?php echo $type ?>_weekend" data-value="0">No</div>
+</div>
+<?php endforeach; ?>
+
+<?php foreach ($performers as $type => $label): ?>
+<div class="question" id="radio_<?php echo $type ?>_nightwork">
+	<h4>Nightwork work for <span><?php echo $label ?></span>?</h4>
+	<div class="answer" data-set="<?php echo $type ?>_nightwork" data-value="1">Yes</div>
+    <div class="answer" data-set="<?php echo $type ?>_nightwork" data-value="0">No</div>
+</div>
+<?php endforeach; ?>
+
+<?php foreach ($performers as $type => $label): ?>
+<div class="question" id="radio_<?php echo $type ?>_travel">
+	<h4>Travel reinbursments work for <span><?php echo $label ?></span>?</h4>
+	<input type="number" name="<?php echo $type ?>_travel" value="0" placeholder="value in $">
+	<div class="answer">Continue</div>
+</div>
+<?php endforeach; ?>
+
+<div class="question" id="radio_multitracking">
+	<h4>Session with multi-tracking?</h4>
+	<div class="answer" data-set="radio_multitracking" data-value="1">Yes</div>
+    <div class="answer" data-set="radio_multitracking" data-value="0">No</div>
+</div>
+
+<div class="question" id="radio_sweetening">
+	<h4>Session with sweetening?</h4>
+	<div class="answer" data-set="radio_sweetening" data-value="1">Yes</div>
+    <div class="answer" data-set="radio_sweetening" data-value="0">No</div>
+</div>
+
+<div class="question" id="radio_broadcast">
+	<h4>How will the commercial air?</h4>
+	<div class="answer multi" data-set="wildspot" data-value="1">Wildspot</div>
+	<div class="answer multi" data-set="network" data-value="1">Network Program Commercial</div>
+	<div class="answer multi" data-set="regional" data-value="1">Regional Network with at least one major</div>
+	<div class="answer multi" data-set="program" data-value="1">Program Commercial - 13 weeks no Majors</div>
+	<div class="answer multi" data-set="local" data-value="1">Local Program Uses</div>
+	<div class="answer multi" data-set="radio_dealer" data-value="1">Dealer</div>
+	<div class="answer multi" data-set="internet" data-value="1">Move Over for Internet</div>
+	<div class="answer multi" data-set="newmedia" data-value="1">Move Over for New Media</div>
+	<div class="answer multi" data-set="foreign" data-value="1">Foreign Use - 18 months </div>
+	<div class="answer multi" data-set="single_market" data-value="1">Single Market Commercial</div>
+	<div class="answer multi" data-set="demo" data-value="1">Demos, Copy Tests, Non-Air (1 hour session)</div>
+	<div class="answer special">Continue</div>
+</div>
+
+<div id="radio_wildspot_weeks" class="question">
+	<h4>How many weeks for wildspot?</h4>
+	<div class="answer" data-set="wildspot_weeks" data-value="8">8 Weeks</div>
+	<div class="answer" data-set="wildspot_weeks" data-value="13">13 Weeks</div>
+</div>
+
+<div class="question" id="radio_wildspot_cycles">
+	<h4>How many cycles for Wildspot?</h4>
+	<?php FalconEstimator::slider('radio_wildspot_cycles', '', 1, 1, 7); ?>
+	<div class="answer">Continue</div>
+</div>
+
+<div id="radio_wildspot_markets" class="question">
+	<h4>In which market(s) will your spot air?</h4>
+    <input type="text" class="js-autocomplete" style="display:none" name="markets" placeholder="Add markets...">
+    <div class="answer">Continue</div>
+</div>
+
+<div id="radio_network_weeks" class="question">
+	<h4>Select desired use cycle for Network Program Commercial?</h4>
+	<div class="answer" data-set="network_cycle" data-value="1_week_unlimited">1 week unlimited use</div>
+	<div class="answer" data-set="network_cycle" data-value="4_week_unlimited">4 week unlimited use</div>
+	<div class="answer" data-set="network_cycle" data-value="8_week_unlimited">8 week unlimited use</div>
+	<div class="answer" data-set="network_cycle" data-value="13_week_unlimited">13 week unlimited use</div>
+	<div class="answer" data-set="network_cycle" data-value="13_week_26_uses">26 uses in 13 weeks</div>
+	<div class="answer" data-set="network_cycle" data-value="13_week_39_uses">39 uses in 13 weeks</div>
+	<div class="answer" data-set="network_cycle" data-value="13_week_accross">13 weeks use on across-the-board programs</div>
+</div>
+
+<div id="radio_dealer_cycle" class="question">
+	<h4>Select desired use cycle Dealer?</h4>
+	<div class="answer" data-set="radio_dealer_cycle" data-value="26_weeks">26 weeks</div>
+	<div class="answer" data-set="radio_dealer_cycle" data-value="8_weeks">8 weeks</div>
+	<div class="answer" data-set="radio_dealer_cycle" data-value="26_weeks_effects">Sound Effects Perfomers - Session + Initial 26-weeks' use</div>
+	<div class="answer" data-set="radio_dealer_cycle" data-value="8_weeks_effects">Sound Effects Perfomers - Session + Initial 8-weeks' use</div>
+</div>
+
+<div id="radio_internet_cycle" class="question">
+	<h4>Select desired use cycle for Move over Internet?</h4>
+	<div class="answer" data-set="internet_cycle" data-value="4week">4 weeks</div>
+	<div class="answer" data-set="internet_cycle" data-value="8weeks">8 weeks</div>
+	<div class="answer" data-set="internet_cycle" data-value="1year">1 Year Option</div>
+</div>
+
+<div id="radio_newmedia_cycle" class="question">
+	<h4>Select desired use cycle for Move over New Media?</h4>
+	<div class="answer" data-set="newmedia_cycle" data-value="4week">4 weeks</div>
+	<div class="answer" data-set="newmedia_cycle" data-value="8weeks">8 weeks</div>
+	<div class="answer" data-set="newmedia_cycle" data-value="1year">1 Year Option</div>
+</div>
+
+<div id="radio_single_market_cycle" class="question">
+	<h4>Select desired use cycle for Single Market?</h4>
+	<div class="answer" data-set="single_market_cycle" data-value="13_week">13 Week Option</div>
+	<div class="answer" data-set="single_market_cycle" data-value="1_year">1 Year PREPAID Use</div>
+</div>
