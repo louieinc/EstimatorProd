@@ -928,7 +928,6 @@ var costs = {
         // performers session fees
         for(var key in Fpe.performers) {
             var performer = key;
-            console.log(performer);
             var count = Fpe.performers[key];
             
             var costObj = Fpe.getPerformerObject(performer);
@@ -1017,7 +1016,6 @@ var costs = {
                             var wsCost = costObj.broadcast[airType];    
                         }
                         if (wsCost == undefined) continue;
-                        console.log(wsCost);
 
                         if (selectedPrimaryMarkets.length == 0) {
                             if (airType == 'spanish_wildspot') {
@@ -1044,8 +1042,6 @@ var costs = {
                                     break;
                             }
                         }
-
-                        console.log(addl);
                     
                         if (selectedPrimaryMarkets.length > 0) {
                             Fpe.putTotal({
@@ -1194,6 +1190,7 @@ var costs = {
                 default:
                     console.log(airType+' not defined');
             }
+            console.log(broadcastFeesTotal);
         }
         
 

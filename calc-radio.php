@@ -76,7 +76,7 @@
 	<div class="answer multi" data-set="radio_dealer" data-value="1">Dealer</div>
 	<div class="answer multi" data-set="internet" data-value="1">Move Over for Internet</div>
 	<div class="answer multi" data-set="newmedia" data-value="1">Move Over for New Media</div>
-	<div class="answer multi" data-set="foreign" data-value="1">Foreign Use - 18 months </div>
+	<div class="answer multi" data-set="radio_foreign" data-value="1">Foreign Use - 18 months </div>
 	<div class="answer multi" data-set="single_market" data-value="1">Single Market Commercial</div>
 	<div class="answer multi" data-set="demo" data-value="1">Demos, Copy Tests, Non-Air (1 hour session)</div>
 	<div class="answer special">Continue</div>
@@ -122,14 +122,14 @@
 <div id="radio_internet_cycle" class="question">
 	<h4>Select desired use cycle for Move over Internet?</h4>
 	<div class="answer" data-set="internet_cycle" data-value="4week">4 weeks</div>
-	<div class="answer" data-set="internet_cycle" data-value="8weeks">8 weeks</div>
+	<div class="answer" data-set="internet_cycle" data-value="8week">8 weeks</div>
 	<div class="answer" data-set="internet_cycle" data-value="1year">1 Year Option</div>
 </div>
 
 <div id="radio_newmedia_cycle" class="question">
 	<h4>Select desired use cycle for Move over New Media?</h4>
 	<div class="answer" data-set="newmedia_cycle" data-value="4week">4 weeks</div>
-	<div class="answer" data-set="newmedia_cycle" data-value="8weeks">8 weeks</div>
+	<div class="answer" data-set="newmedia_cycle" data-value="8week">8 weeks</div>
 	<div class="answer" data-set="newmedia_cycle" data-value="1year">1 Year Option</div>
 </div>
 
