@@ -76,8 +76,11 @@ $navy: #064473;
             }
         }
         input[type=number] {
-            max-width: 60px;
+            max-width: 100px;
             text-align: center;
+            padding: 0 5px 0 15px;
+        }
+        input[type=text] {
             padding: 0 5px 0 15px;
         }
         &.answered {

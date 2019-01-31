@@ -5,14 +5,14 @@
         <div class="answers">
             <div class="answer" data-follow="thank-you tv_broadcast tv_performers" data-type="tv">Television Commercial (union)</div>
             <div class="answer" data-follow="thank-you radio_broadcast radio_multitracking radio_sweetening radio_performers" data-type="radio">Radio Commercial (union)</div>
-            <div class="answer" data-follow="industrial_performers" data-type="industrial">Non-Broadcast/Industrials (union)</div>
-            <div class="answer" data-foloow="nonunion_performers" data-type="nonunion">Non-Broadcast/Industrials Contract (non-union)</div>
+            <div class="answer" data-follow="thank-you industrial_category" data-type="industrial">Corporate/Educational Non-Broadcast (union)</div>
+            <div class="answer" data-follow="thank-you nonunion" data-type="nonunion">Non-union Commercials</div>
         </div>
     </div>
     <?php include dirname(__FILE__).'/calc-tv.php'; ?>
     <?php include dirname(__FILE__).'/calc-radio.php'; ?>
-    <?php //include dirname(__FILE__).'/calc-industrial.php'; ?>
-    <?php //include dirname(__FILE__).'/calc-nonunion.php'; ?>
+    <?php include dirname(__FILE__).'/calc-corporate.php'; ?>
+    <?php include dirname(__FILE__).'/calc-nonunion.php'; ?>
     <div class="question" id="thank-you">
         <h1 class="text-center">Thank you</h1>
     </div>

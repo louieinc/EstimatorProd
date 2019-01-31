@@ -46,7 +46,20 @@ var Fpe = {
         '13_week_26_uses': '26 uses in 13 weeks',
         '13_week_39_uses': '39 uses in 13 weeks',
         '13_week_accross': '13 weeks use on across-the-board programs',
-
+        'category1': 'Category I',
+        'category2': 'Category II',
+        'ivr': 'IVR/Phone Prompts',
+        'storecast': 'Storecast',
+        'on': 'On-Camera Performer',
+        'spokesperson': 'On-Camera Spokesperson',
+        'off': 'Off-Camera, 1st Hour',
+        'retakes': 'Off-Camera, Retakes Entire Script',
+        'on_half': 'On-Camera Performer - Half-Day',
+        'on_3': 'On-Camera Performer - 3 Days',
+        'on_w': 'On-Camera Performer - Weekly',
+        'off_short': 'Off-Camera, 3 mins or less, half hour',
+        'off_retakes': 'Off-Camera, Retakes Entire Script, (One Hour)',
+        'off_retakes2': 'Off-Camera, Retakes Partial Script (30 Minutes)',
     }
 };
 
@@ -82,6 +95,7 @@ var spanish_markets = [
 
 
 var costs = {
+    agent_percent: 10,
     wildspot_markets: {
         "atlanta": 6,
         "austin": 2,
@@ -615,6 +629,39 @@ var costs = {
             creative_session: {session: 266.90},
             singers_contractors: {session: 102.35},
         },
+        industrial: {
+            category1: {
+                on: 519.50,
+                on_half: 337.50,
+                on_3: 1308,
+                on_w: 1826.00,
+                off: 425.50,
+                off_add: 121,
+                off_short: 213,
+                retakes: 425.50,
+                retakes_addl: 124.50,
+                spokesperson: 945.00,
+                spokesperson_add: 519.50,
+            },
+            category2: {
+                on: 647.00,
+                on_half: 420.50,
+                on_3: 1613,
+                on_w: 2261.50,
+                off: 474.00,
+                off_add: 124.50,
+                off_short: 237,
+                retakes: 474.00,
+                retakes_addl: 124.50,
+                spokesperson: 1121.00,
+                spokesperson_add: 647,
+            },
+            ivr: 254.00,
+            storecast: {
+                '3': 425.50,
+                '6': 851.00,
+            }
+        }
     }
 };
 
@@ -693,6 +740,19 @@ var costs = {
                     case 'internet': Fpe.next.unshift('radio_internet_cycle'); break;
                     case 'newmedia': Fpe.next.unshift('radio_newmedia_cycle'); break;
                     case 'single_market': Fpe.next.unshift('radio_single_market_cycle'); break;
+                }
+            });
+            Fpe.moveNext();
+        });
+
+        $('#nu-performers .answer').click(function(e) {
+            e.preventDefault();
+            Fpe.performers = {};
+            $('#nu-performers input').each(function() {
+                if (parseInt($(this).val())) {
+                    var type = $(this).attr('name');
+                    Fpe.performers[type] = parseInt($(this).val());
+                    Fpe.next.unshift('nu-'+type+'-cost');
                 }
             });
             Fpe.moveNext();
@@ -838,6 +898,7 @@ var costs = {
         el.slideDown();
     }
     Fpe.moveNext = function() {
+        console.log(Fpe.next);
         if (Fpe.next.length == 0) {
             console.log('ready');
             $('#fpe .totals').css('position', 'static');
@@ -925,48 +986,364 @@ var costs = {
 
         sessionFeesTotal = 0;
 
-        // performers session fees
-        for(var key in Fpe.performers) {
-            var performer = key;
-            var count = Fpe.performers[key];
-            
-            var costObj = Fpe.getPerformerObject(performer);
+        if (Fpe.type == 'radio' || Fpe.type == 'tv') {
+            // performers session fees for tv and radio
+            for(var key in Fpe.performers) {
+                var performer = key;
+                var count = Fpe.performers[key];
+                
+                var costObj = Fpe.getPerformerObject(performer);
 
-            if (performer == 'creative_session' && count == 0.5) {
-                count = 1;
+                if (performer == 'creative_session' && count == 0.5) {
+                    count = 1;
+                }
+
+                var cost = count*costObj.session;
+                
+                if (Fpe.type == 'tv') {
+                    var hours = Fpe.options[key+'_hours']/8;
+                    cost = cost * hours;
+                }
+                if (Fpe.type == 'radio' && $.inArray(performer, ['announcer', 'solo_duo', 'group_3', 'group_6', 'group_9']) >= 0) {
+                    if (Fpe.options['radio_multitracking']) {
+                        cost - costObj.multitracking;
+                    }
+                    if (Fpe.options['radio_sweetening']) {
+                        cost *= 2;
+                    }
+                }
+                if (Fpe.options[performer+'_weekend']) {
+                    cost *= 1.1;
+                }
+                if (Fpe.options[performer+'_nightwork']) {
+                    cost *= 1.5;
+                }
+                if (Fpe.options[performer+'_travel']) {
+                    cost += parseInt(Fpe.options[performer+'_travel']);
+                }
+                Fpe.putTotal({
+                    text: Fpe.performers[key]+'x '+Fpe.labels[key],
+                    value: cost,
+                    el: sessionFees,
+                });
+                sessionFeesTotal += cost;
             }
 
-            var cost = count*costObj.session;
-            
-            if (Fpe.type == 'tv') {
-                var hours = Fpe.options[key+'_hours']/8;
-                cost = cost * hours;
+            if (sessionFeesTotal > 0) {
+                Fpe.putTotal({
+                    text: 'Session fees subtotal',
+                    value: sessionFeesTotal,
+                    el: sessionFees,
+                    bold: true,
+                });
+                sessionFees.show();
+                subtotal += sessionFeesTotal;
+            } else {
+                sessionFees.hide();
             }
-            if (Fpe.type == 'radio' && $.inArray(performer, ['announcer', 'solo_duo', 'group_3', 'group_6', 'group_9']) >= 0) {
-                if (Fpe.options['radio_multitracking']) {
-                    cost - costObj.multitracking;
+
+            // broadcast for tv and radio
+            for(var i in Fpe.broadcast) {
+                airType = Fpe.broadcast[i];
+                Fpe.putTotal({
+                    text: Fpe.labels[airType],
+                    el: broadcastFees,
+                });
+                switch (airType) {
+                    case 'spanish_wildspot':
+                    case 'wildspot': 
+                        var markets = eval($('#'+type+'_'+airType+'_markets [name=markets]').val());
+                        var marketValue = 0;
+                        var primaryMarkets = ['ny', 'chi', 'la'];
+                        var selectedPrimaryMarkets = [];
+                        var base = type+'_'+broadcast;
+
+                        for (var i in markets) {
+                            if ($.inArray(markets[i], primaryMarkets) != -1) {
+                                selectedPrimaryMarkets.push(markets[i]);
+                            } else {
+                                if (airType == 'wildspot') {
+                                    marketValue += costs.wildspot_markets[markets[i]];
+                                } else {
+                                    marketValue += costs.spanish_markets_weights[markets[i]];
+                                }
+                            }
+                        }
+
+                        for(var performer in Fpe.performers) {
+                            var costObj = Fpe.getPerformerObject(performer);
+                            if (typeof costObj.broadcast == 'undefined') continue;
+                            if (Fpe.type == 'radio') {
+                                var wsCost = costObj.broadcast[airType][Fpe.options.wildspot_weeks];
+                            } else {
+                                var wsCost = costObj.broadcast[airType];    
+                            }
+                            if (wsCost == undefined) continue;
+
+                            if (selectedPrimaryMarkets.length == 0) {
+                                if (airType == 'spanish_wildspot') {
+                                    var majorFee = wsCost.unit_1
+                                }
+                                if (marketValue < 26) {
+                                    var addl = wsCost.unit_2_25;
+                                } else {
+                                    var addl = wsCost.unit_26;
+                                }
+                            } else {
+                                switch(selectedPrimaryMarkets.length) {
+                                    case 1: 
+                                        var majorFee = wsCost[selectedPrimaryMarkets[0]];
+                                        var addl = wsCost[selectedPrimaryMarkets[0]+'_unit'];
+                                        break;
+                                    case 2:
+                                        var majorFee = wsCost.major2;
+                                        var addl = wsCost.major2_unit;
+                                        break;
+                                    case 3:
+                                        var majorFee = wsCost.major3;
+                                        var addl = wsCost.major3_unit;
+                                        break;
+                                }
+                            }
+                        
+                            if (selectedPrimaryMarkets.length > 0) {
+                                Fpe.putTotal({
+                                    text: '1st unit for '+Fpe.performers[performer]+'x '+Fpe.labels[performer],
+                                    value: majorFee*Fpe.performers[performer],
+                                    el: broadcastFees,
+                                });    
+                                broadcastFeesTotal += majorFee*Fpe.performers[performer];
+                            }
+                            if (airType == 'spanish_wildspot') {
+                                Fpe.putTotal({
+                                    text: '1st unit for '+Fpe.performers[performer]+'x '+Fpe.labels[performer],
+                                    value: majorFee*Fpe.performers[performer],
+                                    el: broadcastFees,
+                                });    
+                                broadcastFeesTotal += majorFee*Fpe.performers[performer];
+                            }
+                            Fpe.putTotal({
+                                text: (marketValue-1)+' add\'l units for '+Fpe.performers[performer]+'x '+Fpe.labels[performer]+' at $'+addl,
+                                value: ((marketValue-1)*Fpe.performers[performer]*addl),
+                                el: broadcastFees,
+                            });
+                        }
+                        broadcastFeesTotal += ((marketValue-1)*Fpe.performers[performer]*addl);
+                        break;
+                    case 'cable':
+                        var units = Fpe.options.cable_units;
+                        for(var performer in Fpe.performers) {
+                            var costObj = Fpe.getPerformerObject(performer);
+                            if (typeof costObj.broadcast == 'undefined') continue;
+                            var cost = costObj.broadcast.cable[units];
+                            Fpe.putTotal({
+                                text: Fpe.performers[performer]+'x '+Fpe.labels[performer]+' at $'+cost.toFixed(2),
+                                value: cost*Fpe.performers[performer],
+                                el: broadcastFees,
+                            });    
+                            broadcastFeesTotal += cost*Fpe.performers[performer];
+                        }
+                        break;
+                    case 'network':
+                    case 'radio_dealer':
+                    case 'internet':
+                    case 'newmedia':
+                        var cycle = Fpe.options[airType+'_cycle'];
+                        for(var performer in Fpe.performers) {
+                            var costObj = Fpe.getPerformerObject(performer);
+                            if (typeof costObj.broadcast == 'undefined') continue;
+                            var cost = costObj.broadcast[airType][cycle];
+                            Fpe.putTotal({
+                                text: Fpe.performers[performer]+'x '+Fpe.labels[performer]+' for '+cycle,
+                                value: cost*Fpe.performers[performer],
+                                el: broadcastFees,
+                            });   
+                            broadcastFeesTotal += cost*Fpe.performers[performer]; 
+                        }
+                        break;
+                    case 'demo':
+                    case 'theatrical':
+                    case 'spanish':
+                        for(var performer in Fpe.performers) {
+                            var costObj = Fpe.getPerformerObject(performer);
+                            if (typeof costObj.broadcast == 'undefined') continue;
+                            var cost = costObj.broadcast[airType];
+                            Fpe.putTotal({
+                                text: Fpe.performers[performer]+'x '+Fpe.labels[performer],
+                                value: cost*Fpe.performers[performer],
+                                el: broadcastFees,
+                            });   
+                            broadcastFeesTotal += cost*Fpe.performers[performer]; 
+                        }
+                        break;
+                    case 'foreign':
+                        var mod = Fpe.options.foreign_modifier;
+                        for(var performer in Fpe.performers) {
+                            var costObj = Fpe.getPerformerObject(performer);
+                            if (typeof costObj.broadcast == 'undefined') continue;
+                            var cost = mod*costObj.session;
+                            Fpe.putTotal({
+                                text: Fpe.performers[performer]+'x '+Fpe.labels[performer],
+                                value: cost*Fpe.performers[performer],
+                                el: broadcastFees,
+                            });   
+                            broadcastFeesTotal += cost*Fpe.performers[performer]; 
+                        }
+                        break;
+                    case 'regional':
+                    case 'program':
+                    case 'local': 
+                    case 'radio_foreign':
+                    case 'radio_psa':
+                        for(var performer in Fpe.performers) {
+                            var costObj = Fpe.getPerformerObject(performer);
+                            if (costObj == undefined) continue;
+                            if (typeof costObj.broadcast == 'undefined') continue;
+                            if (typeof costObj.broadcast[airType] == 'undefined') continue;
+                            var cost = costObj.broadcast[airType];
+                            Fpe.putTotal({
+                                text: Fpe.performers[performer]+'x '+Fpe.labels[performer],
+                                value: cost*Fpe.performers[performer],
+                                el: broadcastFees,
+                            });
+                            broadcastFeesTotal += cost*Fpe.performers[performer]; 
+                        }
+                        break;
+                    case 'dealer': 
+                        var dealer = Fpe.options.dealer;
+                        var cycle = Fpe.options.dealer_cycle;
+                        for(var performer in Fpe.performers) {
+                            var costObj = Fpe.getPerformerObject(performer);
+                            if (typeof costObj.broadcast == 'undefined') continue;
+                            var cost = costObj.broadcast[airType][dealer][cycle];
+                            Fpe.putTotal({
+                                text: Fpe.performers[performer]+'x '+Fpe.labels[performer]+' for '+dealer+' '+Fpe.labels[cycle],
+                                value: cost*Fpe.performers[performer],
+                                el: broadcastFees,
+                            });   
+                            broadcastFeesTotal += cost*Fpe.performers[performer]; 
+                        }
+                        break;
+                    case 'program_a':
+                        var uses = Fpe.options.tv_program_a_uses;
+                        var guaranteed = Fpe.options.tv_program_a_uses_guarantee;
+                        for(var performer in Fpe.performers) {
+                            var costObj = Fpe.getPerformerObject(performer);
+                            if (typeof costObj.broadcast == 'undefined') continue;
+                            var cost = 0
+                            if (guaranteed) {
+                                cost = costObj.broadcast.program_a['13g'];
+                            } else {
+                                cost = costObj.broadcast.program_a['1'];
+                                if (uses >= 2) {
+                                    cost += costObj.broadcast.program_a['1'];
+                                }
+                                if (uses > 2) {
+                                    cost += (uses-2)*costObj.broadcast.program_a['3-13'];
+                                }
+                            }
+                            Fpe.putTotal({
+                                text: Fpe.performers[performer]+'x '+Fpe.labels[performer]+' at $'+cost.toFixed(2),
+                                value: cost*Fpe.performers[performer],
+                                el: broadcastFees,
+                            });    
+                            broadcastFeesTotal += cost*Fpe.performers[performer];
+                        }
+                        break;
+                    default:
+                        console.log(airType+' not defined');
                 }
-                if (Fpe.options['radio_sweetening']) {
-                    cost *= 2;
-                }
+                console.log(broadcastFeesTotal);
             }
-            if (Fpe.options[performer+'_weekend']) {
-                cost *= 1.1;
-            }
-            if (Fpe.options[performer+'_nightwork']) {
-                cost *= 1.5;
-            }
-            if (Fpe.options[performer+'_travel']) {
-                cost += parseInt(Fpe.options[performer+'_travel']);
-            }
-            Fpe.putTotal({
-                text: Fpe.performers[key]+'x '+Fpe.labels[key],
-                value: cost,
-                el: sessionFees,
-            });
-            sessionFeesTotal += cost;
         }
 
+        if (Fpe.type == 'industrial') {
+            console.log('industrial');
+            if (typeof Fpe.options.category != 'undefined') {
+                switch (Fpe.options.category) {
+                    case 'category1':
+                    case 'category2': 
+                        if (typeof Fpe.options.performer != 'undefined') {
+                            var cost = costs.fees.industrial[Fpe.options.category][Fpe.options.performer];
+                            var text = Fpe.labels[Fpe.options.performer]+' '+Fpe.labels[Fpe.options.category];
+                            //console.log(text+' '+cost);
+                            if (typeof Fpe.options[Fpe.options.performer+'_addl'] != 'undefined') {
+                                cost *= Fpe.options[Fpe.options.performer+'_addl'];
+                                text += ' - x'+Fpe.options[Fpe.options.performer+'_addl'];
+                            }
+                            Fpe.putTotal({
+                                text: text,
+                                value: cost,
+                                el: sessionFees,
+                            });
+                            sessionFeesTotal += cost;
+                        }
+                        break;
+                    case 'ivr': 
+                        var cost = costs.fees.industrial[Fpe.options.category];
+                        if (typeof Fpe.options.ivr_hours != 'undefined') {
+                            cost *= Fpe.options.ivr_hours;
+                        }
+                        Fpe.putTotal({
+                            text: Fpe.labels[Fpe.options.category],
+                            value: cost,
+                            el: sessionFees,
+                        });
+                        sessionFeesTotal += cost;
+                        break;
+                    case 'storecast': 
+                        if (typeof Fpe.options.storecast_cycle != 'undefined') {
+                            var cost = costs.fees.industrial[Fpe.options.category][Fpe.options.storecast_cycle];
+                            if (typeof Fpe.options.storecast_clients != 'undefined') {
+                                cost *= Fpe.options.storecast_clients;
+                            }
+                            Fpe.putTotal({
+                                text: Fpe.labels[Fpe.options.category],
+                                value: cost,
+                                el: sessionFees,
+                            });
+                            sessionFeesTotal += cost;    
+                        }
+                        break;
+                }
+            } 
+        }
+
+        if (Fpe.type == 'nonunion') {
+            for(var performer in Fpe.performers) {
+                var cost = parseFloat($('#nu-'+performer+'-cost input').val());
+                var count = Fpe.performers[performer];
+                Fpe.putTotal({
+                    text: count+'x '+Fpe.labels[performer],
+                    value: cost,
+                    el: sessionFees,
+                });
+                sessionFeesTotal += cost;
+            }
+
+            var b = parseFloat($('#nu-broadcast-cost input').val());
+            if (b > 0) {
+                var text = 
+                Fpe.putTotal({
+                    text: Fpe.options.usage,
+                    el: broadcastFees,
+                });
+                var text = [];
+                if (typeof Fpe.options['usage-cycle'] != 'undefined') {
+                    text.push(Fpe.options['usage-cycle']);
+                }
+                if (typeof Fpe.options['usage-length'] != 'undefined') {
+                    text.push(Fpe.options['usage-length']);
+                }
+                Fpe.putTotal({
+                    text: text.join(' - '),
+                    value: b,
+                    el: broadcastFees,
+                });
+                broadcastFeesTotal += b;
+            }
+        }
+            
         if (sessionFeesTotal > 0) {
             Fpe.putTotal({
                 text: 'Session fees subtotal',
@@ -979,220 +1356,6 @@ var costs = {
         } else {
             sessionFees.hide();
         }
-
-        for(var i in Fpe.broadcast) {
-            airType = Fpe.broadcast[i];
-            Fpe.putTotal({
-                text: Fpe.labels[airType],
-                el: broadcastFees,
-            });
-            switch (airType) {
-                case 'spanish_wildspot':
-                case 'wildspot': 
-                    var markets = eval($('#'+type+'_'+airType+'_markets [name=markets]').val());
-                    var marketValue = 0;
-                    var primaryMarkets = ['ny', 'chi', 'la'];
-                    var selectedPrimaryMarkets = [];
-                    var base = type+'_'+broadcast;
-
-                    for (var i in markets) {
-                        if ($.inArray(markets[i], primaryMarkets) != -1) {
-                            selectedPrimaryMarkets.push(markets[i]);
-                        } else {
-                            if (airType == 'wildspot') {
-                                marketValue += costs.wildspot_markets[markets[i]];
-                            } else {
-                                marketValue += costs.spanish_markets_weights[markets[i]];
-                            }
-                        }
-                    }
-
-                    for(var performer in Fpe.performers) {
-                        var costObj = Fpe.getPerformerObject(performer);
-                        if (typeof costObj.broadcast == 'undefined') continue;
-                        if (Fpe.type == 'radio') {
-                            var wsCost = costObj.broadcast[airType][Fpe.options.wildspot_weeks];
-                        } else {
-                            var wsCost = costObj.broadcast[airType];    
-                        }
-                        if (wsCost == undefined) continue;
-
-                        if (selectedPrimaryMarkets.length == 0) {
-                            if (airType == 'spanish_wildspot') {
-                                var majorFee = wsCost.unit_1
-                            }
-                            if (marketValue < 26) {
-                                var addl = wsCost.unit_2_25;
-                            } else {
-                                var addl = wsCost.unit_26;
-                            }
-                        } else {
-                            switch(selectedPrimaryMarkets.length) {
-                                case 1: 
-                                    var majorFee = wsCost[selectedPrimaryMarkets[0]];
-                                    var addl = wsCost[selectedPrimaryMarkets[0]+'_unit'];
-                                    break;
-                                case 2:
-                                    var majorFee = wsCost.major2;
-                                    var addl = wsCost.major2_unit;
-                                    break;
-                                case 3:
-                                    var majorFee = wsCost.major3;
-                                    var addl = wsCost.major3_unit;
-                                    break;
-                            }
-                        }
-                    
-                        if (selectedPrimaryMarkets.length > 0) {
-                            Fpe.putTotal({
-                                text: '1st unit for '+Fpe.performers[performer]+'x '+Fpe.labels[performer],
-                                value: majorFee*Fpe.performers[performer],
-                                el: broadcastFees,
-                            });    
-                            broadcastFeesTotal += majorFee*Fpe.performers[performer];
-                        }
-                        if (airType == 'spanish_wildspot') {
-                            Fpe.putTotal({
-                                text: '1st unit for '+Fpe.performers[performer]+'x '+Fpe.labels[performer],
-                                value: majorFee*Fpe.performers[performer],
-                                el: broadcastFees,
-                            });    
-                            broadcastFeesTotal += majorFee*Fpe.performers[performer];
-                        }
-                        Fpe.putTotal({
-                            text: (marketValue-1)+' add\'l units for '+Fpe.performers[performer]+'x '+Fpe.labels[performer]+' at $'+addl,
-                            value: ((marketValue-1)*Fpe.performers[performer]*addl),
-                            el: broadcastFees,
-                        });
-                    }
-                    broadcastFeesTotal += ((marketValue-1)*Fpe.performers[performer]*addl);
-                    break;
-                case 'cable':
-                    var units = Fpe.options.cable_units;
-                    for(var performer in Fpe.performers) {
-                        var costObj = Fpe.getPerformerObject(performer);
-                        if (typeof costObj.broadcast == 'undefined') continue;
-                        var cost = costObj.broadcast.cable[units];
-                        Fpe.putTotal({
-                            text: Fpe.performers[performer]+'x '+Fpe.labels[performer]+' at $'+cost.toFixed(2),
-                            value: cost*Fpe.performers[performer],
-                            el: broadcastFees,
-                        });    
-                        broadcastFeesTotal += cost*Fpe.performers[performer];
-                    }
-                    break;
-                case 'network':
-                case 'radio_dealer':
-                case 'internet':
-                case 'newmedia':
-                    var cycle = Fpe.options[airType+'_cycle'];
-                    for(var performer in Fpe.performers) {
-                        var costObj = Fpe.getPerformerObject(performer);
-                        if (typeof costObj.broadcast == 'undefined') continue;
-                        var cost = costObj.broadcast[airType][cycle];
-                        Fpe.putTotal({
-                            text: Fpe.performers[performer]+'x '+Fpe.labels[performer]+' for '+cycle,
-                            value: cost*Fpe.performers[performer],
-                            el: broadcastFees,
-                        });   
-                        broadcastFeesTotal += cost*Fpe.performers[performer]; 
-                    }
-                    break;
-                case 'demo':
-                case 'theatrical':
-                case 'spanish':
-                    for(var performer in Fpe.performers) {
-                        var costObj = Fpe.getPerformerObject(performer);
-                        if (typeof costObj.broadcast == 'undefined') continue;
-                        var cost = costObj.broadcast[airType];
-                        Fpe.putTotal({
-                            text: Fpe.performers[performer]+'x '+Fpe.labels[performer],
-                            value: cost*Fpe.performers[performer],
-                            el: broadcastFees,
-                        });   
-                        broadcastFeesTotal += cost*Fpe.performers[performer]; 
-                    }
-                    break;
-                case 'foreign':
-                    var mod = Fpe.options.foreign_modifier;
-                    for(var performer in Fpe.performers) {
-                        var costObj = Fpe.getPerformerObject(performer);
-                        if (typeof costObj.broadcast == 'undefined') continue;
-                        var cost = mod*costObj.session;
-                        Fpe.putTotal({
-                            text: Fpe.performers[performer]+'x '+Fpe.labels[performer],
-                            value: cost*Fpe.performers[performer],
-                            el: broadcastFees,
-                        });   
-                        broadcastFeesTotal += cost*Fpe.performers[performer]; 
-                    }
-                    break;
-                case 'regional':
-                case 'program':
-                case 'local': 
-                case 'radio_foreign':
-                case 'radio_psa':
-                    for(var performer in Fpe.performers) {
-                        var costObj = Fpe.getPerformerObject(performer);
-                        if (costObj == undefined) continue;
-                        if (typeof costObj.broadcast == 'undefined') continue;
-                        if (typeof costObj.broadcast[airType] == 'undefined') continue;
-                        var cost = costObj.broadcast[airType];
-                        Fpe.putTotal({
-                            text: Fpe.performers[performer]+'x '+Fpe.labels[performer],
-                            value: cost*Fpe.performers[performer],
-                            el: broadcastFees,
-                        });
-                        broadcastFeesTotal += cost*Fpe.performers[performer]; 
-                    }
-                    break;
-                case 'dealer': 
-                    var dealer = Fpe.options.dealer;
-                    var cycle = Fpe.options.dealer_cycle;
-                    for(var performer in Fpe.performers) {
-                        var costObj = Fpe.getPerformerObject(performer);
-                        if (typeof costObj.broadcast == 'undefined') continue;
-                        var cost = costObj.broadcast[airType][dealer][cycle];
-                        Fpe.putTotal({
-                            text: Fpe.performers[performer]+'x '+Fpe.labels[performer]+' for '+dealer+' '+Fpe.labels[cycle],
-                            value: cost*Fpe.performers[performer],
-                            el: broadcastFees,
-                        });   
-                        broadcastFeesTotal += cost*Fpe.performers[performer]; 
-                    }
-                    break;
-                case 'program_a':
-                    var uses = Fpe.options.tv_program_a_uses;
-                    var guaranteed = Fpe.options.tv_program_a_uses_guarantee;
-                    for(var performer in Fpe.performers) {
-                        var costObj = Fpe.getPerformerObject(performer);
-                        if (typeof costObj.broadcast == 'undefined') continue;
-                        var cost = 0
-                        if (guaranteed) {
-                            cost = costObj.broadcast.program_a['13g'];
-                        } else {
-                            cost = costObj.broadcast.program_a['1'];
-                            if (uses >= 2) {
-                                cost += costObj.broadcast.program_a['1'];
-                            }
-                            if (uses > 2) {
-                                cost += (uses-2)*costObj.broadcast.program_a['3-13'];
-                            }
-                        }
-                        Fpe.putTotal({
-                            text: Fpe.performers[performer]+'x '+Fpe.labels[performer]+' at $'+cost.toFixed(2),
-                            value: cost*Fpe.performers[performer],
-                            el: broadcastFees,
-                        });    
-                        broadcastFeesTotal += cost*Fpe.performers[performer];
-                    }
-                    break;
-                default:
-                    console.log(airType+' not defined');
-            }
-            console.log(broadcastFeesTotal);
-        }
-        
 
         if (broadcastFeesTotal > 0) {
             Fpe.putTotal({
@@ -1207,12 +1370,15 @@ var costs = {
             broadcastFees.hide();
         }
         /* Other fees */
-        var agentFee = subtotal*0.1;
+        var agent_percent = $('[name=agent_fee]').length > 0 ? $('[name=agent_fee]').val() : costs.agent_percent;
+        console.log(agent_percent);
+
+        var agentFee = subtotal*(agent_percent/100);
         var pensionFee = (subtotal+agentFee)*0.18;
         var falconFee = (subtotal+pensionFee+agentFee)*0.08;
         var total = subtotal+agentFee+pensionFee+falconFee;
         Fpe.putTotal({
-            text: 'Talent agent 10%',
+            text: 'Talent agent '+agent_percent+'%',
             value: agentFee,
             el: $('#fpe .totals .other-fees'),
             bold: true,
@@ -1285,9 +1451,7 @@ var costs = {
             var costObj = costs.fees[type][performer];
         }
         return costObj;
-    }
-    
-    
+    }  
 
     Fpe.totalsOnScreen = function() {
         var footer = $('#footer-outer');
