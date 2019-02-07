@@ -12,7 +12,7 @@
 ?>
 
 <div class="question" id="tv_performers">
-	<h4>What types of performers will you be using?</h4>
+	<h4>What types and number of performers will you be using?</h4>
 	<?php
 		foreach ($performers as $type => $label) {
 			FalconEstimator::slider($type, $label);
@@ -59,7 +59,7 @@
 </div>
 
 <div class="question" id="tv_off_camera_tags">
-	<h4>How many on camera tags will you need?</h4>
+	<h4>How many tags will you need?</h4>
 	<input type="number" name="tv_off_camera_tags" value="1" placeholder="1">
     <div class="answer">Continue</div>
 </div>
@@ -83,6 +83,18 @@
     <div class="answer" data-set="tv_multitracking" data-value="0">No</div>
 </div>
 
+<div class="question" id="tv_travel_days_actor_on_camera">
+	<h4>How many travel days for on-camera principal?</h4>
+	<?php FalconEstimator::slider('actor_on_camera_travel_days', '', 0, 0, 10); ?>
+	<div class="answer">Continue</div>
+</div>
+
+<div class="question" id="tv_travel_days_stunt_performer">
+	<h4>How many travel days for stunt performer?</h4>
+	<?php FalconEstimator::slider('stunt_performer_travel_days', '', 0, 0, 10); ?>
+	<div class="answer">Continue</div>
+</div>
+
 <div class="question" id="tv_sweetening">
 	<h4>Session with sweetening?</h4>
 	<div class="answer" data-set="tv_sweetening" data-value="1">Yes</div>
@@ -99,6 +111,8 @@
 	<div class="answer multi" data-set="dealer" data-value="1">Dealer Commercial</div>
 	<div class="answer multi" data-set="internet" data-value="1">Move Over for Internet</div>
 	<div class="answer multi" data-set="newmedia" data-value="1">Move Over for New Media</div>
+	<div class="answer multi" data-set="internet2" data-value="1">Made for Internet</div>
+	<div class="answer multi" data-set="newmedia2" data-value="1">Made for New Media</div>
 	<div class="answer multi" data-set="demo" data-value="1">Demo</div>
 	<div class="answer multi" data-set="foreign" data-value="1">Foreign Use</div>
 	<div class="answer multi" data-set="theatrical" data-value="1">Theatrical/Industrial use</div>
@@ -107,7 +121,7 @@
 
 <div id="tv_wildspot_cycles" class="question">
 	<h4>How many cycles for Wildspot?</h4>
-	<?php FalconEstimator::slider('tv_wildspot_cycles', '', 1, 1, 10); ?>
+	<?php FalconEstimator::slider('tv_wildspot_cycles', '', 1, 1, 7); ?>
 	<div class="answer">Continue</div>
 </div>
 
@@ -131,15 +145,20 @@
 
 <div id="tv_program_a_uses_guarantee" class="question">
 	<h4>13 use guarantee?</h4>
-	<div class="answer" data-set="tv_program_a_guarantee" data-value="1">Yes</div>
+	<div class="answer" data-follow="tv_program_a_uses_quarantee_count" data-set="tv_program_a_guarantee" data-value="1">Yes</div>
     <div class="answer" data-set="tv_program_a_guarantee" data-value="0">No</div>
+</div>
+
+<div id="tv_program_a_uses_quarantee_count" class="question">
+	<h4>How many uses for 13 use guarantee?</h4>
+	<?php FalconEstimator::slider('tv_program_a_uses_guarantee', '', 1, 1, 13); ?>
+	<div class="answer">Continue</div>
 </div>
 
 <div id="tv_cable" class="question">
 	<h4>How many cable units?</h4>
-	<div class="answer" data-set="cable_units" data-value="min" data-set="subs:up_50k">Minimum</div>
-    <div class="answer" data-set="cable_units" data-value="max" data-set="subs:up_100k">Maximum (3000 units)</div>
-
+	<?php FalconEstimator::slider('cable_units', '', 1, 1, 3000); ?>
+	<div class="answer">Continue</div>
 </div>
 
 <div id="tv_spanish" class="question">
@@ -172,6 +191,20 @@
 	<div class="answer" data-set="newmedia_cycle" data-value="4week">4 Week Option</div>
     <div class="answer" data-set="newmedia_cycle" data-value="8week">8 Week Option</div>
     <div class="answer" data-set="newmedia_cycle" data-value="1year">1 year Option</div>
+</div>
+
+<div id="tv_internet2_cycle" class="question">
+	<h4>Select desired use cycle for Move over for Internet</h4>
+	<div class="answer" data-set="internet2_cycle" data-value="4week">4 Week Option</div>
+    <div class="answer" data-set="internet2_cycle" data-value="8week">8 Week Option</div>
+    <div class="answer" data-set="internet2_cycle" data-value="1year">1 year Option</div>
+</div>
+
+<div id="tv_newmedia2_cycle" class="question">
+	<h4>Select desired use cycle for Move over for New Media</h4>
+	<div class="answer" data-set="newmedia2_cycle" data-value="4week">4 Week Option</div>
+    <div class="answer" data-set="newmedia2_cycle" data-value="8week">8 Week Option</div>
+    <div class="answer" data-set="newmedia2_cycle" data-value="1year">1 year Option</div>
 </div>
 
 <div id="tv_foreign" class="question">

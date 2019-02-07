@@ -8,7 +8,7 @@ var Fpe = {
         'pilot': 'Pilot',
         'speciality_act': 'Speciality Act',
         'dancer': 'Dancer',
-        'actor_off_camera': 'Off-Cameral Principal (Ex. Voiceover)',
+        'actor_off_camera': 'Off-Camera Principal (Ex. Voiceover)',
         'singer': 'Singer',
         'extra': 'Extra Performer',
         'wildspot': 'Wildspot 13 weeks',
@@ -16,7 +16,9 @@ var Fpe = {
         'cable': 'Cable',
         'dealer': 'Dealer',
         'internet': 'Move-over-Internet',
-        'newmedia': 'Move-over-New Mdia',
+        'newmedia': 'Move-over-New Media',
+        'internet2': 'Made for Internet',
+        'newmedia2': 'Made for New Media',
         'spanish': 'Spanish Language Program',
         'spanish_wildspot': 'Spanish Language Wildspot',
         'foreign': 'Foreign Use',
@@ -222,6 +224,16 @@ var costs = {
                         '8week': 1175.50,
                         '1year': 2854.75
                     },
+                    internet2: {
+                        '4week': 839.65,
+                        '8week': 1175.50,
+                        '1year': 2854.75
+                    },
+                    newmedia2: {
+                        '4week': 839.65,
+                        '8week': 1175.50,
+                        '1year': 2854.75
+                    },
                     spanish: 2668.15,
                     spanish_wildspot: {
                         unit_1: 705.25,
@@ -276,6 +288,16 @@ var costs = {
                         '1year': 2146.45
                     },
                     newmedia: {
+                        '4week': 631.30,
+                        '8week': 883.85,
+                        '1year': 2146.45
+                    },
+                    internet2: {
+                        '4week': 631.30,
+                        '8week': 883.85,
+                        '1year': 2146.45
+                    },
+                    newmedia2: {
                         '4week': 631.30,
                         '8week': 883.85,
                         '1year': 2146.45
@@ -357,6 +379,16 @@ var costs = {
                         '8week': 447.15,
                         '1year': 1192.40
                     },
+                    internet2: {
+                        '4week': 372.65,
+                        '8week': 447.15,
+                        '1year': 1192.40
+                    },
+                    newmedia2: {
+                        '4week': 372.65,
+                        '8week': 447.15,
+                        '1year': 1192.40
+                    },
                     single_market: {
                         '13_week': 205.45,
                         '1_year': 616.45,
@@ -426,6 +458,16 @@ var costs = {
                         '8week': 447.15,
                         '1year': 1192.40
                     },
+                    internet2: {
+                        '4week': 372.65,
+                        '8week': 447.15,
+                        '1year': 1192.40
+                    },
+                    newmedia2: {
+                        '4week': 372.65,
+                        '8week': 447.15,
+                        '1year': 1192.40
+                    },
                     demo: 205.45,
                     regional: 976.20,
                     program: 976.20,
@@ -487,6 +529,16 @@ var costs = {
                         '1year': 878.40
                     },
                     newmedia: {
+                        '4week': 274.50,
+                        '8week': 329.40,
+                        '1year': 878.40
+                    },
+                    internet2: {
+                        '4week': 274.50,
+                        '8week': 329.40,
+                        '1year': 878.40
+                    },
+                    newmedia2: {
                         '4week': 274.50,
                         '8week': 329.40,
                         '1year': 878.40
@@ -555,6 +607,16 @@ var costs = {
                         '8week': 291.55,
                         '1year': 777.40
                     },
+                    internet2: {
+                        '4week': 242.95,
+                        '8week': 291.55,
+                        '1year': 777.40
+                    },
+                    newmedia2: {
+                        '4week': 242.95,
+                        '8week': 291.55,
+                        '1year': 777.40
+                    },
                     regional: 878.65,
                     program: 457.60,
                     local: 324.00,
@@ -619,6 +681,16 @@ var costs = {
                         '8week': 258.60,
                         '1year': 689.60
                     },
+                    internet2: {
+                        '4week': 215.50,
+                        '8week': 258.60,
+                        '1year': 689.60
+                    },
+                    newmedia2: {
+                        '4week': 215.50,
+                        '8week': 258.60,
+                        '1year': 689.60
+                    },
                     regional: 790.20,
                     program: 457.60,
                     local: 324.00,
@@ -656,7 +728,11 @@ var costs = {
                 spokesperson: 1121.00,
                 spokesperson_add: 647,
             },
-            ivr: 254.00,
+            ivr: {
+                first: 425.50,
+                half: 254.00,
+                over: 124.50,
+            },
             storecast: {
                 '3': 425.50,
                 '6': 851.00,
@@ -752,7 +828,7 @@ var costs = {
                 if (parseInt($(this).val())) {
                     var type = $(this).attr('name');
                     Fpe.performers[type] = parseInt($(this).val());
-                    Fpe.next.unshift('nu-'+type+'-cost');
+                    Fpe.next.unshift('nu-'+type+'-cost', 'nu-'+type+'-wardrobe', 'nu-'+type+'-other', 'nu-'+type+'-reimbursments' );
                 }
             });
             Fpe.moveNext();
@@ -773,7 +849,10 @@ var costs = {
                             Fpe.next.unshift('tv_off_camera_tags'); 
                             break;
                         case 'actor_on_camera':
-                            Fpe.next.unshift('tv_on_camera_tags');
+                            Fpe.next.unshift('tv_on_camera_tags', 'tv_travel_days_actor_on_camera');
+                            break;
+                        case 'stunt_performer':
+                            Fpe.next.unshift('tv_on_camera_tags', 'tv_travel_days_stunt_performer');
                             break;
                     }
                     Fpe.next.unshift('tv_'+type+'_hours', 'tv_'+type+'_weekend','tv_'+type+'_nightwork','tv_'+type+'_travel');
@@ -788,14 +867,13 @@ var costs = {
             $('#radio_performers input').each(function() {
                 if (parseInt($(this).val())) {
                     var type = $(this).attr('name');
-                    console.log(type);
                     Fpe.performers[type] = parseFloat($(this).val());
                     /*if (type == 'creative_session') {
                         Fpe.next.unshift('radio_creative_sessions');
                     }*/
-                    if ($.inArray(type, ['creative_session', 'singers_contractors']) == -1) {
-                        Fpe.next.unshift('radio_'+type+'_weekend','radio_'+type+'_nightwork','radio_'+type+'_travel');
-                    }
+                    //if ($.inArray(type, ['creative_session', 'singers_contractors']) == -1) {
+                    Fpe.next.unshift('radio_'+type+'_weekend','radio_'+type+'_nightwork','radio_'+type+'_travel');
+                    //}
                 }
             });
             Fpe.moveNext();
@@ -831,6 +909,11 @@ var costs = {
                     $(this).parents('.question').find('input[name="'+$(this).data('update')+'"]').val(ui.value).change();
 
                 }
+            }).bind('updateHandle', function(event, ui) {
+                var value = $(this).slider('value');
+                var handle = $(this).find('.ui-slider-handle').first();
+                handle.text(value);
+                $(this).parents('.question').find('input[name="'+$(this).data('update')+'"]').val(value).change();                
             });
         });
 
@@ -847,6 +930,12 @@ var costs = {
             event.preventDefault();
             Fpe.performers = {};
             Fpe.options = {};
+            $('#fpe input[type=text]').val('');
+            $('#fpe input[type=number]').val(0);
+            $('.numeric-slider').each(function() {
+                $(this).slider('value', $(this).data('default')).trigger('updateHandle');
+                //$(this).data('slider')._change();
+            })
             $('#fpe .expand').click();
             Fpe.next = ['commercial-type']
             Fpe.moveNext();
@@ -898,7 +987,6 @@ var costs = {
         el.slideDown();
     }
     Fpe.moveNext = function() {
-        console.log(Fpe.next);
         if (Fpe.next.length == 0) {
             console.log('ready');
             $('#fpe .totals').css('position', 'static');
@@ -1000,7 +1088,7 @@ var costs = {
 
                 var cost = count*costObj.session;
                 
-                if (Fpe.type == 'tv') {
+                if (Fpe.type == 'tv' && Fpe.options[key+'_hours']) {
                     var hours = Fpe.options[key+'_hours']/8;
                     cost = cost * hours;
                 }
@@ -1021,6 +1109,12 @@ var costs = {
                 if (Fpe.options[performer+'_travel']) {
                     cost += parseInt(Fpe.options[performer+'_travel']);
                 }
+                if (performer == 'actor_on_camera' || performer == 'stunt_performer') {
+                    if (Fpe.options[performer+'_travel_days']) {
+                        var c = parseInt(Fpe.options[performer+'_travel_days']);
+                        cost += c*costObj.session
+                    }
+                }
                 Fpe.putTotal({
                     text: Fpe.performers[key]+'x '+Fpe.labels[key],
                     value: cost,
@@ -1029,22 +1123,11 @@ var costs = {
                 sessionFeesTotal += cost;
             }
 
-            if (sessionFeesTotal > 0) {
-                Fpe.putTotal({
-                    text: 'Session fees subtotal',
-                    value: sessionFeesTotal,
-                    el: sessionFees,
-                    bold: true,
-                });
-                sessionFees.show();
-                subtotal += sessionFeesTotal;
-            } else {
-                sessionFees.hide();
-            }
-
             // broadcast for tv and radio
             for(var i in Fpe.broadcast) {
                 airType = Fpe.broadcast[i];
+                var markets = eval($('#'+type+'_'+airType+'_markets [name=markets]').val());
+                //console.log(markets);
                 Fpe.putTotal({
                     text: Fpe.labels[airType],
                     el: broadcastFees,
@@ -1052,7 +1135,7 @@ var costs = {
                 switch (airType) {
                     case 'spanish_wildspot':
                     case 'wildspot': 
-                        var markets = eval($('#'+type+'_'+airType+'_markets [name=markets]').val());
+                        //var markets = eval($('#'+type+'_'+airType+'_markets [name=markets]').val());
                         var marketValue = 0;
                         var primaryMarkets = ['ny', 'chi', 'la'];
                         var selectedPrimaryMarkets = [];
@@ -1280,16 +1363,30 @@ var costs = {
                         }
                         break;
                     case 'ivr': 
-                        var cost = costs.fees.industrial[Fpe.options.category];
                         if (typeof Fpe.options.ivr_hours != 'undefined') {
-                            cost *= Fpe.options.ivr_hours;
+                            var text = Fpe.labels[Fpe.options.category];
+                            switch (Fpe.options.ivr_hours) {
+                                case 0.5: 
+                                    var cost = costs.fees.industrial.ivr.half; 
+                                    text += ' 1/2 hour';
+                                    break;
+                                case 1: 
+                                    var cost = costs.fees.industrial.ivr.first; 
+                                    text += ' 1 hour';
+                                    break;
+                                default: 
+                                    var cost = costs.fees.industrial.ivr.first;
+                                    cost += (Fpe.options.ivr_hours-1)*costs.fees.industrial.ivr.over;
+                                    text += ' '+Fpe.options.ivr_hours+' hours';
+                                    break;
+                            }
+                            Fpe.putTotal({
+                                text: text,
+                                value: cost,
+                                el: sessionFees,
+                            });
+                            sessionFeesTotal += cost;
                         }
-                        Fpe.putTotal({
-                            text: Fpe.labels[Fpe.options.category],
-                            value: cost,
-                            el: sessionFees,
-                        });
-                        sessionFeesTotal += cost;
                         break;
                     case 'storecast': 
                         if (typeof Fpe.options.storecast_cycle != 'undefined') {
@@ -1312,6 +1409,13 @@ var costs = {
         if (Fpe.type == 'nonunion') {
             for(var performer in Fpe.performers) {
                 var cost = parseFloat($('#nu-'+performer+'-cost input').val());
+                var other = ['other', 'reimbursments'];
+                for(var k in other) {
+                    var c = parseFloat($('#nu-'+performer+'-'+other[k]+' input').val());
+                    if (typeof c != 'undefined') {
+                        cost += c;
+                    }
+                }
                 var count = Fpe.performers[performer];
                 Fpe.putTotal({
                     text: count+'x '+Fpe.labels[performer],
@@ -1371,7 +1475,6 @@ var costs = {
         }
         /* Other fees */
         var agent_percent = $('[name=agent_fee]').length > 0 ? $('[name=agent_fee]').val() : costs.agent_percent;
-        console.log(agent_percent);
 
         var agentFee = subtotal*(agent_percent/100);
         var pensionFee = (subtotal+agentFee)*0.18;

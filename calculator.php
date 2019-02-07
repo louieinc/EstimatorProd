@@ -3,16 +3,21 @@
     <div class="question" id="commercial-type" style="display: block;">
         <h4>What kind of production are you hiring for?</h4>
         <div class="answers">
-            <div class="answer" data-follow="thank-you tv_broadcast tv_performers" data-type="tv">Television Commercial (union)</div>
-            <div class="answer" data-follow="thank-you radio_broadcast radio_multitracking radio_sweetening radio_performers" data-type="radio">Radio Commercial (union)</div>
-            <div class="answer" data-follow="thank-you industrial_category" data-type="industrial">Corporate/Educational Non-Broadcast (union)</div>
-            <div class="answer" data-follow="thank-you nonunion" data-type="nonunion">Non-union Commercials</div>
+            <div class="answer" data-follow="thank-you agent tv_broadcast tv_performers" data-type="tv">Television Commercial (union)</div>
+            <div class="answer" data-follow="thank-you agent radio_broadcast radio_multitracking radio_sweetening radio_performers" data-type="radio">Radio Commercial (union)</div>
+            <div class="answer" data-follow="thank-you agent industrial_category" data-type="industrial">Corporate/Educational Non-Broadcast (union)</div>
+            <div class="answer" data-follow="thank-you agent nonunion" data-type="nonunion">Non-union Commercials</div>
         </div>
     </div>
     <?php include dirname(__FILE__).'/calc-tv.php'; ?>
     <?php include dirname(__FILE__).'/calc-radio.php'; ?>
     <?php include dirname(__FILE__).'/calc-corporate.php'; ?>
     <?php include dirname(__FILE__).'/calc-nonunion.php'; ?>
+    <div id="agent" class="question">
+        <h4>Talent Agent Service Fee (percent)</h4>
+        <?php FalconEstimator::slider('agent_fee', '', 10, 0, 25, 0.5); ?>
+        <div class="answer">Continue</div>
+    </div>
     <div class="question" id="thank-you">
         <h1 class="text-center">Thank you</h1>
     </div>

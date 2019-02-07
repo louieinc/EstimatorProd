@@ -18,6 +18,8 @@
 
 #fpe .d-flex .flex-g { flex-grow: 10; }
 
+#fpe .numeric-slider span { font-size: 11px; position: absolute; top: -25px; right: 0; }
+
 #fpe .question { display: none; }
 
 #fpe .question h4 { font-family: 'Roboto', sans-serif; font-size: 18px; color: #000; margin-bottom: 20px; padding: 0; font-weight: bold; line-height: 1.2; }

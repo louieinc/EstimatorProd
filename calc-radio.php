@@ -11,7 +11,7 @@
 ?>
 
 <div class="question" id="radio_performers">
-	<h4>What types of performers will you be using?</h4>
+	<h4>What types and number of performers will you be using?</h4>
 	<?php
 		foreach ($performers as $type => $label) {
 			if ($type == 'creative_session') {
@@ -76,6 +76,8 @@
 	<div class="answer multi" data-set="radio_dealer" data-value="1">Dealer</div>
 	<div class="answer multi" data-set="internet" data-value="1">Move Over for Internet</div>
 	<div class="answer multi" data-set="newmedia" data-value="1">Move Over for New Media</div>
+	<div class="answer multi" data-set="internet2" data-value="1">Made for Internet</div>
+	<div class="answer multi" data-set="newmedia2" data-value="1">Made Over for New Media</div>
 	<div class="answer multi" data-set="radio_foreign" data-value="1">Foreign Use - 18 months </div>
 	<div class="answer multi" data-set="single_market" data-value="1">Single Market Commercial</div>
 	<div class="answer multi" data-set="demo" data-value="1">Demos, Copy Tests, Non-Air (1 hour session)</div>
@@ -103,9 +105,9 @@
 <div id="radio_network_weeks" class="question">
 	<h4>Select desired use cycle for Network Program Commercial?</h4>
 	<div class="answer" data-set="network_cycle" data-value="1_week_unlimited">1 week unlimited use</div>
-	<div class="answer" data-set="network_cycle" data-value="4_week_unlimited">4 week unlimited use</div>
-	<div class="answer" data-set="network_cycle" data-value="8_week_unlimited">8 week unlimited use</div>
-	<div class="answer" data-set="network_cycle" data-value="13_week_unlimited">13 week unlimited use</div>
+	<div class="answer" data-set="network_cycle" data-value="4_week_unlimited">4 weeks unlimited use</div>
+	<div class="answer" data-set="network_cycle" data-value="8_week_unlimited">8 weeks unlimited use</div>
+	<div class="answer" data-set="network_cycle" data-value="13_week_unlimited">13 weeks unlimited use</div>
 	<div class="answer" data-set="network_cycle" data-value="13_week_26_uses">26 uses in 13 weeks</div>
 	<div class="answer" data-set="network_cycle" data-value="13_week_39_uses">39 uses in 13 weeks</div>
 	<div class="answer" data-set="network_cycle" data-value="13_week_accross">13 weeks use on across-the-board programs</div>
@@ -131,6 +133,20 @@
 	<div class="answer" data-set="newmedia_cycle" data-value="4week">4 weeks</div>
 	<div class="answer" data-set="newmedia_cycle" data-value="8week">8 weeks</div>
 	<div class="answer" data-set="newmedia_cycle" data-value="1year">1 Year Option</div>
+</div>
+
+<div id="radio_internet2_cycle" class="question">
+	<h4>Select desired use cycle for Move over Internet?</h4>
+	<div class="answer" data-set="internet2_cycle" data-value="4week">4 weeks</div>
+	<div class="answer" data-set="internet2_cycle" data-value="8week">8 weeks</div>
+	<div class="answer" data-set="internet2_cycle" data-value="1year">1 Year Option</div>
+</div>
+
+<div id="radio_newmedia2_cycle" class="question">
+	<h4>Select desired use cycle for Move over New Media?</h4>
+	<div class="answer" data-set="newmedia2_cycle" data-value="4week">4 weeks</div>
+	<div class="answer" data-set="newmedia2_cycle" data-value="8week">8 weeks</div>
+	<div class="answer" data-set="newmedia2_cycle" data-value="1year">1 Year Option</div>
 </div>
 
 <div id="radio_single_market_cycle" class="question">

@@ -194,8 +194,9 @@ class FalconEstimator {
     		<h4><?php echo $label ?></h4>
             <?php endif; ?>
     		<input style="display:none;" type="number"  name="<?php echo $handle ?>" value="<?php echo $default ?>">
-    		<div id="" data-update="<?php echo $handle ?>" data-step="<?php echo $step ?>" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" class="numeric-slider">
+    		<div id="" data-update="<?php echo $handle ?>" data-step="<?php echo $step ?>" data-default="<?php echo $default ?>" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" class="numeric-slider">
                 <div class="ui-slider-handle custom-handle"></div>
+                <span>Use slider to select</span>
     		</div>
         </div>
 		<?php 

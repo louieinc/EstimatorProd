@@ -11,14 +11,14 @@ $performers = [
 
 <div class="question" id="nonunion">
 	<h4>What type of Non-Union production are you hiring for?</h4>
-	<div class="answer" data-set="nonunion" data-follow="nu-agent nu-broadcast-cost nu-usage-length nu-usage nu-performers" data-value="tv">TV Commercial</div>
-    <div class="answer" data-set="nonunion" data-follow="nu-agent nu-broadcast-cost nu-usage-length nu-usage nu-performers" data-value="radio">Radio Commercial</div>
-    <div class="answer" data-set="nonunion" data-follow="nu-agent nu-broadcast-cost nu-usage-length nu-usage nu-performers" data-value="print">Print Model</div>
-    <div class="answer" data-set="nonunion" data-follow="nu-agent nu-broadcast-cost nu-usage-length nu-usage nu-performers" data-value="instructional">Instructional/Educational Video: Not Intended for Broadcast</div>
+	<div class="answer" data-set="nonunion" data-follow="nu-broadcast-cost nu-usage-length nu-usage nu-performers" data-value="tv">TV Commercial</div>
+    <div class="answer" data-set="nonunion" data-follow="nu-broadcast-cost nu-usage-length nu-usage nu-performers" data-value="radio">Radio Commercial</div>
+    <div class="answer" data-set="nonunion" data-follow="nu-broadcast-cost nu-usage-length nu-usage nu-performers" data-value="print">Print Model</div>
+    <div class="answer" data-set="nonunion" data-follow="nu-broadcast-cost nu-usage-length nu-usage nu-performers" data-value="instructional">Instructional/Educational Video: Not Intended for Broadcast</div>
 </div>
 
 <div id="nu-performers" class="question">
-	<h4>What type of performer will you be hiring?</h4>
+	<h4>What types and number of performers will you be hiring?</h4>
 	<?php foreach($performers as $type => $label): ?>
 		<?php FalconEstimator::slider($type, $label, 0, 0, 10, 1); ?>
 	<?php endforeach; ?>
@@ -26,11 +26,26 @@ $performers = [
 </div>
 
 <?php foreach($performers as $type => $label): ?>
-<div id="nu-<?php echo $type ?>-cost" class="question">
-	<h4>How much would you estimate the session fees for <?php echo $label ?>?</h4>
-	<input type="number" name="<?php echo $type ?>" value="0">
-	<div class="answer">Continue</div>
-</div>
+	<div id="nu-<?php echo $type ?>-cost" class="question">
+		<h4>How much would you estimate the session fees for <?php echo $label ?>?</h4>
+		<input type="number" name="<?php echo $type ?>" value="0">
+		<div class="answer">Continue</div>
+	</div>
+	<div id="nu-<?php echo $type ?>-wardrobe" class="question">
+		<h4>Is there a wardrobe fitting for <?php echo $label ?>?</h4>
+		<div class="answer" data-set="<?php echo $type ?>_wardrobe" data-value="yes">Yes</div>
+		<div class="answer" data-set="<?php echo $type ?>_wardrobe" data-value="no">No</div>
+	</div>
+	<div id="nu-<?php echo $type ?>-other" class="question">
+		<h4>Other costs for <?php echo $label ?>?</h4>
+		<input type="number" name="<?php echo $type ?>_other" value="0">
+		<div class="answer">Continue</div>
+	</div>
+	<div id="nu-<?php echo $type ?>-reimbursments" class="question">
+		<h4>Reimbursments costs for <?php echo $label ?>?</h4>
+		<input type="number" name="<?php echo $type ?>_reimbursments" value="0">
+		<div class="answer">Continue</div>
+	</div>
 <?php endforeach; ?>
 
 <div id="nu-usage" class="question">
@@ -81,11 +96,5 @@ $performers = [
 <div id="nu-broadcast-cost" class="question">
 	<h4>How much you estimate for the broadcasting rights?</h4>
 	<input type="number" name="broadcast_cost" value="0">
-	<div class="answer">Continue</div>
-</div>
-
-<div id="nu-agent" class="question">
-	<h4>Talent Agent Service Fee (percent)</h4>
-	<?php FalconEstimator::slider('agent_fee', '', 1, 10, 25, 0.5); ?>
 	<div class="answer">Continue</div>
 </div>

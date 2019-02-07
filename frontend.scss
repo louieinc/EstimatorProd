@@ -40,6 +40,14 @@ $navy: #064473;
             flex-grow: 10;
         }
     }
+    .numeric-slider {
+        span {
+            font-size: 11px;
+            position: absolute;
+            top: -25px;
+            right: 0;
+        }
+    }
     .question {
         display: none;
         h4 {
