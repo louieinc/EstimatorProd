@@ -8,6 +8,8 @@
 
 #fpe #legal .inner p { font-size: 12px; line-height: 1.4; }
 
+@media (max-width: 767px) { #fpe #legal .inner { max-height: 60vh; margin-top: 10vh; overflow: scroll; } }
+
 #fpe.ready .back { display: none !important; }
 
 #fpe.ready .totals { position: static; }
