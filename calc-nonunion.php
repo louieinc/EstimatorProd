@@ -18,7 +18,7 @@ $performers = [
 </div>
 
 <div id="nu-performers" class="question">
-	<h4>What types and number of performers will you be hiring?</h4>
+	<h4>What type of performer will you be hiring for?</h4>
 	<?php foreach($performers as $type => $label): ?>
 		<?php FalconEstimator::slider($type, $label, 0, 0, 10, 1); ?>
 	<?php endforeach; ?>

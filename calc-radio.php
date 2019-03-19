@@ -11,7 +11,7 @@
 ?>
 
 <div class="question" id="radio_performers">
-	<h4>What types and number of performers will you be using?</h4>
+	<h4>What type of performer will you be hiring for?</h4>
 	<?php
 		foreach ($performers as $type => $label) {
 			if ($type == 'creative_session') {
@@ -32,23 +32,29 @@
 
 <?php foreach ($performers as $type => $label): ?>
 <div class="question" id="radio_<?php echo $type ?>_weekend">
-	<h4>Weekend work for <span><?php echo $label ?></span>?</h4>
-	<div class="answer" data-set="<?php echo $type ?>_weekend" data-value="1">Yes</div>
+	<h4>Weekend or Holiday work for <span><?php echo $label ?></span>?</h4>
+	<div class="answer" data-follow="radio_<?php echo $type ?>_weekend_days" data-set="<?php echo $type ?>_weekend" data-value="1">Yes</div>
     <div class="answer" data-set="<?php echo $type ?>_weekend" data-value="0">No</div>
 </div>
-<?php endforeach; ?>
+<div class="question" id="radio_<?php echo $type ?>_weekend_days">
+	<h4>How many days?</h4>
+    <?php FalconEstimator::slider($type.'_weekend_days', '', 1, 1, 10); ?>
+	<div class="answer">Continue</div>
+</div>
 
-<?php foreach ($performers as $type => $label): ?>
 <div class="question" id="radio_<?php echo $type ?>_nightwork">
 	<h4>Nightwork work for <span><?php echo $label ?></span>?</h4>
-	<div class="answer" data-set="<?php echo $type ?>_nightwork" data-value="1">Yes</div>
+	<div class="answer" data-follow="radio_<?php echo $type ?>_nightwork_time" data-set="<?php echo $type ?>_nightwork" data-value="1">Yes</div>
     <div class="answer" data-set="<?php echo $type ?>_nightwork" data-value="0">No</div>
 </div>
-<?php endforeach; ?>
+<div class="question" id="radio_<?php echo $type ?>_nightwork_time">
+	<h4>How many hours?</h4>
+	<?php FalconEstimator::slider($type.'_nightwork_time', '', 1, 1, 10); ?>
+	<div class="answer">Continue</div>
+</div>
 
-<?php foreach ($performers as $type => $label): ?>
 <div class="question" id="radio_<?php echo $type ?>_travel">
-	<h4>Travel reinbursments work for <span><?php echo $label ?></span>?</h4>
+	<h4>Travel reimbursements work for <span><?php echo $label ?></span>?</h4>
 	<input type="number" name="<?php echo $type ?>_travel" value="0" placeholder="value in $">
 	<div class="answer">Continue</div>
 </div>
@@ -64,6 +70,12 @@
 	<h4>Session with sweetening?</h4>
 	<div class="answer" data-set="radio_sweetening" data-value="1">Yes</div>
     <div class="answer" data-set="radio_sweetening" data-value="0">No</div>
+</div>
+
+<div id="radio-stop" class="question">
+    <h4>Would you like to esetimate perform usage costs?</h4>
+    <div class="answer" data-follow="radio_broadcast">Yes</div>
+    <div class="answer">No, estimate for talent session fees only</div>
 </div>
 
 <div class="question" id="radio_broadcast">
@@ -99,6 +111,11 @@
 <div id="radio_wildspot_markets" class="question">
 	<h4>In which market(s) will your spot air?</h4>
     <input type="text" class="js-autocomplete" style="display:none" name="markets" placeholder="Add markets...">
+    <div class="answer">Continue</div>
+</div>
+<div id="radio_wildspot_markets_nonmajor" class="question">
+	<h4>How many non-major markets?</h4>
+    <?php FalconEstimator::slider('markets_nonmajor', '', 0, 0, 50); ?>
     <div class="answer">Continue</div>
 </div>
 

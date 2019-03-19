@@ -2,6 +2,56 @@ $gray: #cfcfcf;
 $navy: #064473;
 
 #fpe {
+    #legal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        &.hide {
+            display: none;
+        }
+        .inner {
+            max-width: 600px;
+            padding: 2rem;
+            background: #fff;
+            margin-top: -30vh;
+            p {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+        }
+    }
+    &.ready {
+        .back {
+            display: none !important;
+        }
+        .totals {
+            position: static;
+        }
+        .disclaimer {
+            display: none !important;
+        }
+    }
+    .rel {
+        position: relative;
+    }
+    .disclaimer {
+        font-size: 11px;
+        position: absolute;
+        top: -40px;
+        width: 100%;
+        text-align: center;
+        a {
+            font-size: inherit !important;
+        }
+    }
     .fpe-row {
         display: flex;
         flex-direction: row;
@@ -67,8 +117,8 @@ $navy: #064473;
             border: 1px solid #cfcfcf;
             border-radius: 3px;
             font-size: 18px;
-            line-height: 48px;
-            padding: 0 15px;
+            line-height: 1.2;
+            padding: 10px 15px;
             margin-bottom: 16px;
             cursor: pointer;
             width: 100%;
@@ -164,6 +214,19 @@ $navy: #064473;
                     }
                 }
             }
+        }
+    }
+    #final {
+        input[type=text] {
+            padding: 0 10px !important;
+        }
+        textarea {
+            padding: 5px 10px !important;
+            height: 150px;
+        }
+        input[type=text],
+        textarea {
+            border: 1px solid #eee !important;
         }
     }
 }
@@ -477,6 +540,41 @@ $navy: #064473;
         border-radius: 5px;
         &.ui-state-hover {
             background: white !important;
+        }
+    }
+}
+
+.print-only {
+    display: none;
+}
+
+@media print {
+    #fpe h1,
+    #fpe .totals .actions,
+    #header-space,
+    #header-outer,
+    #fpe .question,
+    #fpe .back,
+    #fpe .disclaimer,
+    #fpe .totals .expand span,
+    #page-header-wrap,
+    #footer-outer {
+        display: none !important;
+    }
+    .print-only {
+        display: initial !important;
+    }
+    body {
+        background: transparent !important;
+    }
+    #fpe {
+        .totals {
+            background: transparent !important;
+            border: 0 !important;
+            position: static !important;
+            .detailed {
+                display: block !important;
+            }
         }
     }
 }

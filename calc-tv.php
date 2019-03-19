@@ -12,7 +12,7 @@
 ?>
 
 <div class="question" id="tv_performers">
-	<h4>What types and number of performers will you be using?</h4>
+	<h4>What type of performer will you be hiring for?</h4>
 	<?php
 		foreach ($performers as $type => $label) {
 			FalconEstimator::slider($type, $label);
@@ -20,36 +20,57 @@
 	?>
 	<div class="answer special">Continue</div>
 </div>
-<?php foreach ($performers as $type => $label): ?>
+<?php foreach ($performers as $type => $label): $default = $type=='actor_off_camera' ? 2 : 8; ?>
 <div class="question" id="tv_<?php echo $type ?>_hours" >
 	<h4>How many hours for <span><?php echo $label ?></span>?</h4>
-	<?php FalconEstimator::slider( $type.'_hours', '', 8, 8, 12 ); ?>
+	<?php FalconEstimator::slider( $type.'_hours', '', $default, $default, 12 ); ?>
 	<div class="answer" data-show="tv">Continue</div>
 </div>
 <?php endforeach; ?>
 
 <?php foreach ($performers as $type => $label): ?>
+
 <div class="question" id="tv_<?php echo $type ?>_weekend">
-	<h4>Weekend work for <span><?php echo $label ?></span>?</h4>
-	<div class="answer" data-set="<?php echo $type ?>_weekend" data-value="1">Yes</div>
+	<h4>Weekend or Holiday work for <span><?php echo $label ?></span>?</h4>
+	<div class="answer" data-follow="tv_<?php echo $type ?>_weekend_days" data-set="<?php echo $type ?>_weekend" data-value="1">Yes</div>
     <div class="answer" data-set="<?php echo $type ?>_weekend" data-value="0">No</div>
 </div>
-<?php endforeach; ?>
+<div class="question" id="tv_<?php echo $type ?>_weekend_days">
+	<h4>How many days?</h4>
+    <?php FalconEstimator::slider($type.'_weekend_days', '', 1, 1, 10); ?>
+	<div class="answer">Continue</div>
+</div>
 
-<?php foreach ($performers as $type => $label): ?>
 <div class="question" id="tv_<?php echo $type ?>_nightwork">
 	<h4>Nightwork work for <span><?php echo $label ?></span>?</h4>
-	<div class="answer" data-set="<?php echo $type ?>_nightwork" data-value="1">Yes</div>
+	<div class="answer" data-follow="tv_<?php echo $type ?>_nightwork_time" data-set="<?php echo $type ?>_nightwork" data-value="1">Yes</div>
     <div class="answer" data-set="<?php echo $type ?>_nightwork" data-value="0">No</div>
 </div>
-<?php endforeach; ?>
+<div class="question" id="tv_<?php echo $type ?>_nightwork_time">
+	<h4>How many hours?</h4>
+	<?php FalconEstimator::slider($type.'_nightwork_time', '', 1, 1, 10); ?>
+	<div class="answer">Continue</div>
+</div>
 
-<?php foreach ($performers as $type => $label): ?>
 <div class="question" id="tv_<?php echo $type ?>_travel">
-	<h4>Travel reinbursments work for <span><?php echo $label ?></span>?</h4>
+	<h4>Travel reimbursments work for <span><?php echo $label ?></span>?</h4>
 	<input type="number" name="<?php echo $type ?>_travel" value="0" placeholder="value in $">
 	<div class="answer">Continue</div>
 </div>
+
+<?php if (in_array($type, ['actor_on_camera', 'actor_off_camera'])): ?>
+	<div class="question" id="tv_<?php echo $type ?>_lift1">
+		<h4>1st lift for <span><?php echo $label ?></span>?</h4>
+		<div class="answer" data-follow="tv_<?php echo $type ?>_lift2" data-set="<?php echo $type ?>_lift1" data-value="1">Yes</div>
+    	<div class="answer" data-set="<?php echo $type ?>_lift1" data-value="0">No</div>
+	</div>
+	<div class="question" id="tv_<?php echo $type ?>_lift2">
+		<h4>2nd lift for <span><?php echo $label ?></span>?</h4>
+		<div class="answer" data-set="<?php echo $type ?>_lift2" data-value="1">Yes</div>
+    	<div class="answer" data-set="<?php echo $type ?>_lift2" data-value="0">No</div>
+	</div>
+<?php endif; ?>
+
 <?php endforeach; ?>
 
 <div class="question" id="tv_on_camera_tags">
@@ -101,11 +122,18 @@
     <div class="answer" data-set="tv_sweetening" data-value="0">No</div>
 </div>
 
+<div id="tv-stop" class="question">
+    <h4>Would you like to esetimate perform usage costs?</h4>
+    <div class="answer" data-follow="tv_broadcast">Yes</div>
+    <div class="answer">No, estimate for talent session fees only</div>
+</div>
+
 <div class="question" id="tv_broadcast">
 	<h4>How will the commercial air?</h4>
 	<div class="answer multi" data-set="wildspot" data-value="1">Wildspot 13-weeks</div>
 	<div class="answer multi" data-set="program_a" data-value="1">Program Class A ":30"</div>
 	<div class="answer multi" data-set="cable" data-value="1">Cable Only</div>
+	<div class="answer multi" data-set="local_cable" data-value="1">Local Cable</div>
 	<div class="answer multi" data-set="spanish" data-value="1">Spanish Language Program</div>
 	<div class="answer multi" data-set="spanish_wildspot" data-value="1">Spanish Language Wild Spot</div>
 	<div class="answer multi" data-set="dealer" data-value="1">Dealer Commercial</div>
@@ -114,8 +142,10 @@
 	<div class="answer multi" data-set="internet2" data-value="1">Made for Internet</div>
 	<div class="answer multi" data-set="newmedia2" data-value="1">Made for New Media</div>
 	<div class="answer multi" data-set="demo" data-value="1">Demo</div>
+	<div class="answer multi" data-set="psa" data-value="1">PSA</div>
 	<div class="answer multi" data-set="foreign" data-value="1">Foreign Use</div>
 	<div class="answer multi" data-set="theatrical" data-value="1">Theatrical/Industrial use</div>
+	<div class="answer multi" data-set="madein" data-value="1">Made-in/Played-in</div>
 	<div class="answer special">Continue</div>
 </div>
 
@@ -128,6 +158,12 @@
 <div id="tv_wildspot_markets" class="question">
 	<h4>In which market(s) will your spot air?</h4>
     <input type="text" class="js-autocomplete" style="display:none" name="markets" placeholder="Add markets...">
+    <div class="answer" data-follow="tv_wildspot_markets_nonmajor">Continue</div>
+</div>
+
+<div id="tv_wildspot_markets_nonmajor" class="question">
+	<h4>How many non-major markets?</h4>
+    <?php FalconEstimator::slider('markets_nonmajor', '', 0, 0, 50); ?>
     <div class="answer">Continue</div>
 </div>
 
@@ -137,28 +173,40 @@
     <div class="answer">Continue</div>
 </div>
 
+<div id="tv_program_a_uses_guarantee" class="question">
+	<h4>Guaranteed 13 uses?</h4>
+	<div class="answer" data-follow="tv_program_a_uses_quarantee_count" data-set="tv_program_a_guarantee" data-value="1">Yes</div>
+    <div class="answer" data-follow="tv_program_a_uses" data-set="tv_program_a_guarantee" data-value="0">No</div>
+</div>
+
 <div id="tv_program_a_uses" class="question">
-	<h4>How many uses will your spot air for Program Class A?</h4>
+	<h4>How many total uses?</h4>
 	<?php FalconEstimator::slider('tv_program_a_uses', '', 1, 1, 13); ?>
 	<div class="answer">Continue</div>
 </div>
 
-<div id="tv_program_a_uses_guarantee" class="question">
-	<h4>13 use guarantee?</h4>
-	<div class="answer" data-follow="tv_program_a_uses_quarantee_count" data-set="tv_program_a_guarantee" data-value="1">Yes</div>
-    <div class="answer" data-set="tv_program_a_guarantee" data-value="0">No</div>
-</div>
-
 <div id="tv_program_a_uses_quarantee_count" class="question">
-	<h4>How many uses for 13 use guarantee?</h4>
-	<?php FalconEstimator::slider('tv_program_a_uses_guarantee', '', 1, 1, 13); ?>
+	<h4>How many uses above 13?</h4>
+	<?php FalconEstimator::slider('tv_program_a_uses', '', 13, 13, 26); ?>
 	<div class="answer">Continue</div>
 </div>
 
 <div id="tv_cable" class="question">
-	<h4>How many cable units?</h4>
+	<h4>How many cable units for Cable Only?</h4>
 	<?php FalconEstimator::slider('cable_units', '', 1, 1, 3000); ?>
 	<div class="answer">Continue</div>
+</div>
+
+<div id="tv_local_cable" class="question">
+	<h4>How many subscribers for local cable?</h4>
+	<div class="answer" data-set="local_cable_subscribers" data-value="50k">1 - 50,000</div>
+    <div class="answer" data-set="local_cable_subscribers" data-value="100k">50,001 - 100,000</div>
+    <div class="answer" data-set="local_cable_subscribers" data-value="150k">100,001 - 150,000</div>
+    <div class="answer" data-set="local_cable_subscribers" data-value="200k">150,001 - 200,000</div>
+    <div class="answer" data-set="local_cable_subscribers" data-value="250k">200,001 - 250,000</div>
+    <div class="answer" data-set="local_cable_subscribers" data-value="500k">250,001 - 500,000</div>
+    <div class="answer" data-set="local_cable_subscribers" data-value="750k">500,001 - 750,000</div>
+    <div class="answer" data-set="local_cable_subscribers" data-value="1000k">750,001 - 1,000,000</div>
 </div>
 
 <div id="tv_spanish" class="question">

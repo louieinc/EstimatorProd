@@ -7,7 +7,7 @@
 </div>
 
 <div class="question" id="industrial_performers">
-	<h4>What types and number of performers will you be using?</h4>
+	<h4>What type of performer will you be hiring for?</h4>
 	<div class="answer" data-set="performer" data-value="on">On-Camera Performer - 1 Day</div>
 	<div class="answer" data-set="performer" data-value="on_half">On-Camera Performer - Half-Day</div>
 	<div class="answer" data-set="performer" data-value="on_3">On-Camera Performer - 3 Days</div>
