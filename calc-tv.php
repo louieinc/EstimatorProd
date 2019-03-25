@@ -181,13 +181,13 @@
 
 <div id="tv_program_a_uses" class="question">
 	<h4>How many total uses?</h4>
-	<?php FalconEstimator::slider('tv_program_a_uses', '', 1, 1, 13); ?>
+	<?php FalconEstimator::slider('tv_program_a_uses', '', 1, 1, 500); ?>
 	<div class="answer">Continue</div>
 </div>
 
 <div id="tv_program_a_uses_quarantee_count" class="question">
 	<h4>How many uses above 13?</h4>
-	<?php FalconEstimator::slider('tv_program_a_uses', '', 13, 13, 26); ?>
+	<?php FalconEstimator::slider('tv_program_a_uses', '', 13, 13, 500); ?>
 	<div class="answer">Continue</div>
 </div>
 
