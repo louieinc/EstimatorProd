@@ -123,7 +123,7 @@
 </div>
 
 <div id="tv-stop" class="question">
-    <h4>Would you like to esetimate perform usage costs?</h4>
+    <h4>Would you like to estimate perform usage costs?</h4>
     <div class="answer" data-follow="tv_broadcast">Yes</div>
     <div class="answer">No, estimate for talent session fees only</div>
 </div>
