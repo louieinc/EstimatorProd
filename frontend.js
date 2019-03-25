@@ -493,17 +493,28 @@
 						airTypeText += ' - '+Fpe.labels[Fpe.options.local_cable_subscribers];
 					}
 					break;
-				case 'wildspot':
+				/*case 'wildspot':
 				case 'spanish_wildspot':
 					if (markets && markets.length > 0) {
 						airTypeText += ' ('+Fpe.getMarketsLabels(markets.slice(), (airType=='wildspot' ? all_markets : spanish_markets)).join(', ')+')';
 					}
-					break;
+					break;*/
 			 }
 			 Fpe.putTotal({
 				text: airTypeText,
 				el: broadcastFees,
 			 });
+
+			 if (airType == 'wildspot' || airType == 'spanish_wildspot') {
+				 if (markets && markets.length > 0) {
+					 var marketsText = 'Markets Selected: '+Fpe.getMarketsLabels(markets.slice(), (airType=='wildspot' ? all_markets : spanish_markets)).join(', ');
+					 Fpe.putTotal({
+						 'text': marketsText,
+						 el: broadcastFees,
+					 });
+				 }
+
+			 }
 			 switch (airType) {
 				case 'spanish_wildspot':
 				case 'wildspot': 
