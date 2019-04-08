@@ -34,8 +34,8 @@
 
 <div class="question" id="storecast_clients">
 	<h4>Are there multiple clients?</h4>
-	<div class="answer" data-set="storecast_client" data-value="1">Yes</div>
-	<div class="answer" data-set="storecast_client" data-value="0.5">No</div>
+	<div class="answer" data-set="storecast_client" data-value="1.4795">Yes</div>
+	<div class="answer" data-set="storecast_client" data-value="1">No</div>
 </div>
 
 <div class="question" id="storecast_cycle">
