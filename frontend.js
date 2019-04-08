@@ -780,7 +780,12 @@
 						var text = Fpe.labels[Fpe.options.performer]+' '+Fpe.labels[Fpe.options.category];
 						//console.log(text+' '+cost);
 						if (typeof Fpe.options[Fpe.options.performer+'_addl'] != 'undefined') {
-							cost *= Fpe.options[Fpe.options.performer+'_addl'];
+							var addl = Fpe.options[Fpe.options.performer+'_addl']-1;
+							var addl_cost = costs.fees.industrial[Fpe.options.category][Fpe.options.performer+'_addl'];
+							if  (typeof addl_cost == 'undefined') {
+								addl_cost = cost;
+							}
+							cost += addl_cost*addl;
 							text += ' - x'+Fpe.options[Fpe.options.performer+'_addl'];
 						}
 						Fpe.putTotal({
