@@ -140,11 +140,11 @@ $navy: #064473;
         }
         input[type=number] {
             max-width: 100px;
-            text-align: center;
-            padding: 0 5px 0 15px;
+            text-align: right;
+            padding: 10px;
         }
         input[type=text] {
-            padding: 0 5px 0 15px;
+            padding: 10px;
         }
         &.answered {
             
@@ -223,11 +223,12 @@ $navy: #064473;
     }
     #final {
         input[type=text] {
-            padding: 0 10px !important;
+            padding: 10px !important;
         }
         textarea {
             padding: 5px 10px !important;
             height: 150px;
+            box-sizing: border-box !important;
         }
         input[type=text],
         textarea {

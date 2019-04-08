@@ -493,17 +493,28 @@
 						airTypeText += ' - '+Fpe.labels[Fpe.options.local_cable_subscribers];
 					}
 					break;
-				case 'wildspot':
+				/*case 'wildspot':
 				case 'spanish_wildspot':
 					if (markets && markets.length > 0) {
 						airTypeText += ' ('+Fpe.getMarketsLabels(markets.slice(), (airType=='wildspot' ? all_markets : spanish_markets)).join(', ')+')';
 					}
-					break;
+					break;*/
 			 }
 			 Fpe.putTotal({
 				text: airTypeText,
 				el: broadcastFees,
 			 });
+
+			 if (airType == 'wildspot' || airType == 'spanish_wildspot') {
+				 if (markets && markets.length > 0) {
+					 var marketsText = 'Markets Selected: '+Fpe.getMarketsLabels(markets.slice(), (airType=='wildspot' ? all_markets : spanish_markets)).join(', ');
+					 Fpe.putTotal({
+						 'text': marketsText,
+						 el: broadcastFees,
+					 });
+				 }
+
+			 }
 			 switch (airType) {
 				case 'spanish_wildspot':
 				case 'wildspot': 
@@ -865,6 +876,25 @@
 			 broadcastFeesTotal += b;
 			}
 		}
+
+		if (Fpe.options.above_scale) {
+			var count = Fpe.options.above_scale_count;
+			var rate = Fpe.options.above_scale_rate;
+			for (key in Fpe.performers) {
+				var costObj = Fpe.getPerformerObject(key);
+				break;
+			}
+
+			if (typeof count != 'undefined' && typeof rate != 'undefined') {
+				Fpe.putTotal({
+					text: count+'x above scale: '+rate+' scale',
+					value: count*rate*costObj.session,
+					el: sessionFees,
+					bold: true,
+				});
+				sessionFeesTotal += count*rate*costObj.session;
+			}
+		}
 			
 		if (sessionFeesTotal > 0) {
 			Fpe.putTotal({
@@ -893,6 +923,7 @@
 		}
 		/* Other fees */
 		var agent_percent = $('[name=agent_fee]').length > 0 ? $('[name=agent_fee]').val() : costs.agent_percent;
+
 
 		var agentFee = subtotal*(agent_percent/100);
 		var pensionFee = (subtotal+agentFee)*(Fpe.type == 'industrial' ? (16.5/100) : (18/100)) || 0;

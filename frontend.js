@@ -876,6 +876,25 @@
 			 broadcastFeesTotal += b;
 			}
 		}
+
+		if (Fpe.options.above_scale) {
+			var count = Fpe.options.above_scale_count;
+			var rate = Fpe.options.above_scale_rate;
+			for (key in Fpe.performers) {
+				var costObj = Fpe.getPerformerObject(key);
+				break;
+			}
+
+			if (typeof count != 'undefined' && typeof rate != 'undefined') {
+				Fpe.putTotal({
+					text: count+'x above scale: '+rate+' scale',
+					value: count*rate*costObj.session,
+					el: sessionFees,
+					bold: true,
+				});
+				sessionFeesTotal += count*rate*costObj.session;
+			}
+		}
 			
 		if (sessionFeesTotal > 0) {
 			Fpe.putTotal({
@@ -904,6 +923,7 @@
 		}
 		/* Other fees */
 		var agent_percent = $('[name=agent_fee]').length > 0 ? $('[name=agent_fee]').val() : costs.agent_percent;
+
 
 		var agentFee = subtotal*(agent_percent/100);
 		var pensionFee = (subtotal+agentFee)*(Fpe.type == 'industrial' ? (16.5/100) : (18/100)) || 0;

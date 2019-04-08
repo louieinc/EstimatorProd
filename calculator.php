@@ -34,17 +34,17 @@
 
     <div id="above_scale" class="question">
         <h4>Are there any performers above scale</h4>
-        <div class="answer" data-follow="above_scale_count">Yes</div>
-        <div class="answer" data-follow="above_scale_handle">No</div>
+        <div class="answer" data-set="above_scale" data-value="1" data-follow="above_scale_handle above_scale_count">Yes</div>
+        <div class="answer" data-set="above_scale" data-value="0">No</div>
     </div>
     <div id="above_scale_count" class="question">
         <h4>How many above scale?</h4>
-        <?php FalconEstimator::slider('above_scale', '', 1, 1, 100); ?>
+        <?php FalconEstimator::slider('above_scale_count', '', 1, 1, 100); ?>
         <div class="answer">Continue</div>
     </div>
     <div id="above_scale_handle" class="question">
         <h4>How are Above Scale estimates handled?</h4>
-        <?php FalconEstimator::slider('above_scale', '', 1, 1, 10000); ?>
+        <?php FalconEstimator::slider('above_scale_rate', '', 1, 1, 10000); ?>
         <div class="answer">Continue</div>
     </div>
     <div id="legal">
