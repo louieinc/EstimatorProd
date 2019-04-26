@@ -160,7 +160,7 @@
             </table>
 
             <h3>Program A</h3>
-            <table>
+            <table class="form-table">
                 <?php
                 foreach ($type as $t) {
 					FalconEstimator::field("Actor {$t}-camera 1st use", "_tv_program_a_{$t}_use_1");
@@ -173,7 +173,7 @@
             </table>
 
             <h3>Dealer</h3>
-            <table>
+            <table class="form-table">
                 <?php
                 foreach ($type as $t) {
 					FalconEstimator::field("Actor {$t}-camera A 6 Months", "_tv_dealer_{$t}_a_6m");
