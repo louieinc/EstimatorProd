@@ -66,7 +66,7 @@ class FalconEstimator {
 		if ($post->ID == $page) {
 			wp_enqueue_script('fpe-autocomplete', plugin_dir_url(__FILE__).'/autocomplete/jQuery.tagify.min.js', array('jquery'));
 			wp_enqueue_script('fpe-polyfills', plugin_dir_url(__FILE__).'/autocomplete/tagify.polyfills.js', array('jquery'));
-			wp_enqueue_script('fpe-vars', plugin_dir_url(__FILE__).'/variables.js?v='.rand(0, 1000), array('jquery', 'jquery-ui-core', 'jquery-ui-slider'));
+			wp_enqueue_script('fpe-vars', plugin_dir_url(__FILE__).'/variables.js.php?v='.rand(0, 1000), array('jquery', 'jquery-ui-core', 'jquery-ui-slider'));
 			wp_enqueue_script('fpe-scripts', plugin_dir_url(__FILE__).'/frontend.js?v='.rand(0, 1000), array('jquery', 'jquery-ui-core', 'jquery-ui-slider', 'fpe-vars'));
 			wp_enqueue_style('fpe-styles', plugin_dir_url(__FILE__).'/frontend.css?v='.rand(0, 1000));
 			wp_enqueue_script('fpe-touch', '//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js', array('jquery', 'jquery-ui-core', 'jquery-ui-slider'));

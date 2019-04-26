@@ -10,8 +10,14 @@
                     FalconEstimator::field('General Extra On-Camera', '_extra_actor');
                     FalconEstimator::field('Radio Actor/announcer', '_radio_actor');
                     FalconEstimator::field('Radio Singer', '_radio_singer');
+				    FalconEstimator::field('Pilot', '_pilot');
+				    FalconEstimator::field('Radio Groups 3-5', '_radio_group_3');
+				    FalconEstimator::field('Radio Groups 6-8', '_radio_group_6');
+				    FalconEstimator::field('Radio Groups 9+', '_radio_group_9');
                 ?>
             </table>
+
+            <?php /*
             <h3>Session Fees for Demo Commercials</h3>
             <table class="form-table">
                 <?php
@@ -20,15 +26,68 @@
                     FalconEstimator::field('Radio Singer', '_radio_singer_demo');
                 ?>
             </table>
+            */ ?>
+
+            <h3>Session Fees For Corporate Commercials: Category 1</h3>
+            <table class="form-table">
+				<?php
+				FalconEstimator::field('On-Camera - 1 Day', '_psa_category1_on');
+				FalconEstimator::field('On-Camera - Half Day', '_psa_category1_on_half');
+				FalconEstimator::field('On-Camera - 3 Days', '_psa_category1_on_3');
+				FalconEstimator::field('On-Camera - Weekly', '_psa_category1_on_w');
+				FalconEstimator::field('Off-Camera - 1st hour', '_psa_category1_off');
+				FalconEstimator::field('Off-Camera - Additional 1/2 hr', '_psa_category1_off_addl');
+				FalconEstimator::field('Off-Camera, 3 mins or less, half hour', '_psa_category1_off_short');
+				FalconEstimator::field('Off-Camera, Retakes Entire Script, (One Hour)', '_psa_category1_retakes');
+				FalconEstimator::field('Off-Camera, Retakes Entire Script, (additional)', '_psa_category1_retakes_addl');
+				FalconEstimator::field('On-Camera Spokesperson', '_psa_category1_spokesperson');
+				FalconEstimator::field('On-Camera Spokesperson (Additional)', '_psa_category1_spokesperson_add');
+				?>
+            </table>
+
+            <h3>Session Fees For Corporate Commercials: Category 2</h3>
+            <table class="form-table">
+				<?php
+				FalconEstimator::field('On-Camera - 1 Day', '_psa_category2_on');
+				FalconEstimator::field('On-Camera - Half Day', '_psa_category2_on_half');
+				FalconEstimator::field('On-Camera - 3 Days', '_psa_category2_on_3');
+				FalconEstimator::field('On-Camera - Weekly', '_psa_category2_on_w');
+				FalconEstimator::field('Off-Camera - 1st hour', '_psa_category2_off');
+				FalconEstimator::field('Off-Camera - Additional 1/2 hr', '_psa_category2_off_addl');
+				FalconEstimator::field('Off-Camera, 3 mins or less, half hour', '_psa_category2_off_short');
+				FalconEstimator::field('Off-Camera, Retakes Entire Script, (One Hour)', '_psa_category2_retakes');
+				FalconEstimator::field('Off-Camera, Retakes Entire Script, (additional)', '_psa_category2_retakes_addl');
+				FalconEstimator::field('On-Camera Spokesperson', '_psa_category2_spokesperson');
+				FalconEstimator::field('On-Camera Spokesperson (Additional)', '_psa_category2_spokesperson_add');
+				?>
+            </table>
+
+            <h3>Session Fees For Corporate Commercials: IVR</h3>
+            <table class="form-table">
+                <?php
+				FalconEstimator::field('1 Hour', '_psa_ivr_first');
+				FalconEstimator::field('1/2 Hour', '_psa_ivr_first');
+				FalconEstimator::field('Overtime', '_psa_ivr_over');
+                ?>
+            </table>
+            <h3>Session Fees For Corporate Commercials: Storecast</h3>
+            <table class="form-table">
+				<?php
+				FalconEstimator::field('3 Month', '_psa_storecast_3');
+				FalconEstimator::field('6 Month', '_psa_storecast_6');
+				?>
+            </table>
+
+            <?php /*
             <h3>Session Fees for PSA</h3>
             <table class="form-table">
                 <?php
                     FalconEstimator::field('PSA Actor/announcer', '_psa_actor_demo');
                     FalconEstimator::field('PSA Singer', '_psa_singer_demo');
-                    /*FalconEstimator::field('PSA Actor on camera', '_psa_actor_on_camera');
-                    FalconEstimator::field('PSA Actor off camera', '_psa_actor_off_camera');*/
                 ?>
             </table>
+            */ ?>
+
             <h3>Other</h3>
             <table class="form-table">
                 <?php
