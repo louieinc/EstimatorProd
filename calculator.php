@@ -47,7 +47,7 @@
         <?php FalconEstimator::slider('above_scale_rate', '', 1, 1, 10000); ?>
         <div class="answer">Continue</div>
     </div>
-    <div id="legal">
+    <div id="legal" style="display: none;">
         <div class="inner">
             <p><strong>NOTICE:</strong> All of the contents of this website are protected from copying under U.S. and international copyright laws and treatises.  Any unauthorized copying, alteration, distribution, transmission, performance, display or other use of this material is prohibited.  This website and the contents therein are the sole, confidential and proprietary property of Falcon Enterprises, Inc. d/b/a Falcon Paymasters.  The privileged information contained therein is for the sole use by authorized users.  If you are not an authorized user be advised you are prohibited from disseminating, disclosing, copying or taking action on the information contained within the estimator.  If you are an authorized user, please be advised that the estimator is for estimating purposes only, and the employees, officers, or associates of Falcon Paymasters, cannot be held liable for any proposed estimate unless reviewed and confirmed by Falcon Paymasters.  </p>
             <p>Falcon Paymasters controls and operates this website from its offices within the State of Ohio.  Falcon Paymasters does not imply that the materials published on this website are appropriate for use outside of the United States.  If you access this website from outside of the United States, you do so on your own initiative and are responsible for compliance with local laws.  The terms of this website shall be governed by the laws of the state of Ohio.</p>
