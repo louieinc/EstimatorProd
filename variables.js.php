@@ -1,11 +1,8 @@
 <?php
-try {
-	if (!@include_once dirname(__FILE__).'/../../wp-load.php') {
-	    throw new Exception('Try Local');
-    }
-} catch (Exception $e) {
-	require_once '/Users/radu/Development/wordpress/wp-load.php';
-}
+
+require_once dirname(__FILE__).'/../../wp-load.php');
+//require_once '/Users/radu/Development/wordpress/wp-load.php';
+    
 header("Content-type: application/javascript");
 ?>
 var Fpe = {
