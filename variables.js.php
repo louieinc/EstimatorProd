@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/../../wp-load.php';
+require_once dirname(__FILE__).'/../../../wp-load.php';
 //require_once '/Users/radu/Development/wordpress/wp-load.php';
     
 header("Content-type: application/javascript");
