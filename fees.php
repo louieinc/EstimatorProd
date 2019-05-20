@@ -66,7 +66,7 @@
             <table class="form-table">
                 <?php
 				FalconEstimator::field('1 Hour', '_psa_ivr_first');
-				FalconEstimator::field('1/2 Hour', '_psa_ivr_first');
+				FalconEstimator::field('1/2 Hour', '_psa_ivr_half');
 				FalconEstimator::field('Overtime', '_psa_ivr_over');
                 ?>
             </table>

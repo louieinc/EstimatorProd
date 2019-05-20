@@ -931,7 +931,7 @@
 
 
 		var agentFee = subtotal*(agent_percent/100);
-		var pensionFee = (subtotal+agentFee)*(Fpe.type == 'industrial' ? (16.5/100) : (18/100)) || 0;
+		var pensionFee = (subtotal+agentFee)*(Fpe.type == 'industrial' ? (16.5/100) : (19/100)) || 0;
 		var contributions = (subtotal+agentFee)*(Fpe.options.contributions/100) || 0;
 		var falconFee = (subtotal+pensionFee+agentFee+contributions)*0.1 || 0;
 		var total = subtotal+agentFee+pensionFee+falconFee+contributions;
@@ -950,7 +950,7 @@
 		});*/
 		if (pensionFee) {
 			Fpe.putTotal({
-				text: 'Union Benefits ('+(Fpe.type == 'industrial' ? 16.5 : 18)+'%)',
+				text: 'Union Benefits ('+(Fpe.type == 'industrial' ? 16.5 : 19)+'%)',
 				value: pensionFee,
 				el: $('#fpe .totals .other-fees'),
 				bold: true,

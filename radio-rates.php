@@ -65,7 +65,7 @@
             <table class="form-table">
                 <?php
                     FalconEstimator::field('26 weeks', "_radio_dealer_{$group}_26w");
-                    FalconEstimator::field('26 weeks', "_radio_dealer_{$group}_8w");
+                    FalconEstimator::field('8 weeks', "_radio_dealer_{$group}_8w");
 				    if ($group == 'principal') {
 						FalconEstimator::field('26 weeks_effects', "_radio_dealer_{$group}_8w_effects");
 						FalconEstimator::field('26 weeks', "_radio_dealer_{$group}_26w_effects");
