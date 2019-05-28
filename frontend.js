@@ -932,6 +932,9 @@
 
 		var agentFee = subtotal*(agent_percent/100);
 		var pensionFee = (subtotal+agentFee)*(Fpe.type == 'industrial' ? (16.5/100) : (19/100)) || 0;
+		if (Fpe.type == 'nonunion') {
+			pensionFee = 0;
+		}
 		var contributions = (subtotal+agentFee)*(Fpe.options.contributions/100) || 0;
 		var falconFee = (subtotal+pensionFee+agentFee+contributions)*0.1 || 0;
 		var total = subtotal+agentFee+pensionFee+falconFee+contributions;
