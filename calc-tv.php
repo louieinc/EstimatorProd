@@ -123,7 +123,7 @@
 </div>
 
 <div id="tv-stop" class="question">
-    <h4>Would you like to estimate perform usage costs?</h4>
+    <h4>Would you like to estimate usage costs?</h4>
     <div class="answer" data-follow="tv_broadcast">Yes</div>
     <div class="answer">No, estimate for talent session fees only</div>
 </div>
@@ -145,7 +145,7 @@
 	<div class="answer multi" data-set="psa" data-value="1">PSA</div>
 	<div class="answer multi" data-set="foreign" data-value="1">Foreign Use</div>
 	<div class="answer multi" data-set="theatrical" data-value="1">Theatrical/Industrial use</div>
-	<div class="answer multi" data-set="madein" data-value="1">Made-in/Played-in</div>
+	<div class="answer multi" data-set="madein" data-value="1">Made-in/Played-in <span style="font-weight: bold;color: red>Coming Soon!</span></div>
 	<div class="answer special">Continue</div>
 </div>
 
