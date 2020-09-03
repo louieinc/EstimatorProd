@@ -34,9 +34,7 @@ $navy: #064473;
         }
     }
     &.ready {
-        .back {
-            display: none !important;
-        }
+        
         .totals {
             position: static;
         }
@@ -560,7 +558,7 @@ $navy: #064473;
     #header-space,
     #header-outer,
     #fpe .question,
-    
+    #fpe .back,
     #fpe .disclaimer,
     #fpe .totals .expand span,
     #page-header-wrap,
