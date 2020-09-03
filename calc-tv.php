@@ -145,7 +145,7 @@
 	<div class="answer multi" data-set="psa" data-value="1">PSA</div>
 	<div class="answer multi" data-set="foreign" data-value="1">Foreign Use</div>
 	<div class="answer multi" data-set="theatrical" data-value="1">Theatrical/Industrial use</div>
-	<div class="multi" data-set="madein" data-value="1">Made-in/Played-in <span style="font-weight: bold;color: red">Coming Soon!</span></div>
+	<div class="answer multi disabled" data-set="madein" data-value="1">Made-in/Played-in <span style="font-weight: bold;color: red">Coming Soon!</span></div>
 	<div class="answer special">Continue</div>
 </div>
 
