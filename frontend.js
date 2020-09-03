@@ -903,7 +903,7 @@
 			
 		if (sessionFeesTotal > 0) {
 			Fpe.putTotal({
-			 text: 'Session fees subtotal',
+			 text: 'Gross Wages',
 			 value: sessionFeesTotal,
 			 el: sessionFees,
 			 bold: true,

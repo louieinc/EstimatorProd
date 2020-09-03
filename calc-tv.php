@@ -5,7 +5,7 @@
 		'pilot' => 'Pilot',
 		'speciality_act' => 'Speciality Act',
 		'dancer' => 'Dancer',
-		'actor_off_camera' => 'Off-Cameral Principal (Ex. Voiceover)',
+		'actor_off_camera' => 'Off-Cameral Principal',
 		'singer' => 'Singer',
 		'extra' => 'Extra Performer',
 	];
