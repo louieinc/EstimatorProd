@@ -138,20 +138,6 @@ $navy: #064473;
                 background:#f5f5f5;
             }
         }
-        .answer2, input[type=text], input[type=number] {
-            border: 1px solid #cfcfcf;
-            border-radius: 3px;
-            font-size: 18px;
-            line-height: 1.2;
-            padding: 10px 15px;
-            margin-bottom: 16px;
-            cursor: pointer;
-            width: 100%;
-            display: block;            
-            &.dont-show {
-                display: none !important;
-            }            
-        }
         input[type=number] {
             max-width: 100px;
             text-align: right;

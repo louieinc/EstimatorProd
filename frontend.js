@@ -58,7 +58,9 @@
 		})
 
 		$('.answer.multi').click(function() {
-			$(this).toggleClass('checked');
+			console.log($(this).data('set'));
+			if($(this).data('set') != 'madein')
+				$(this).toggleClass('checked');
 		});
 
 		$('#tv_broadcast .answer.special').click(function() {
