@@ -69,7 +69,7 @@
     <div class="question" id="thank-you">
         <h1 class="text-center">Thank you</h1>
     </div>
-    <a href="#" class="back" style="display: none;"><i class="fa fa-angle-left"></i> backx</a>
+    <a href="#" class="back" style="display: none;"><i class="fa fa-angle-left"></i> back</a>
     <div class="totals">
         <div class="container rel">
             <div class="disclaimer">
